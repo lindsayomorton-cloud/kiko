@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+  <script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0;height:100%;overflow:hidden;background:#f5ead8}
+    a{color:var(--color-accent-700)} a:hover{color:var(--color-accent-800)}
+    @keyframes bdNo{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+    @keyframes bdConf{0%{transform:translate(0,-10vh) rotate(0);opacity:1}100%{transform:translate(var(--dx),110vh) rotate(var(--rot));opacity:1}}
+    @keyframes bdFly{0%{transform:translate(0,0) scale(.4);opacity:0}12%{opacity:1}50%{transform:translate(calc(var(--dx) * .5),-38vh) scale(1) rotate(-12deg)}100%{transform:translate(var(--dx),-80vh) scale(.8) rotate(12deg);opacity:0}}
+    @keyframes bdFlap{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.35)}}
+    @keyframes bdPop{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}25%{transform:translate(-50%,-50%) scale(1.15);opacity:1}80%{opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+    @keyframes bdHop{0%{transform:translateY(0) scale(1,1)}30%{transform:translateY(-18px) scale(.97,1.04)}60%{transform:translateY(0) scale(1.04,.96)}100%{transform:translateY(0) scale(1,1)}}
+    @keyframes bdChat{0%{transform:scale(.4) translateY(30px);opacity:0}100%{transform:scale(1) translateY(0);opacity:1}}
+    @keyframes muWob{0%,100%{transform:translateX(0) rotate(0)}25%{transform:translateX(-7px) rotate(-5deg)}75%{transform:translateX(7px) rotate(5deg)}}
+    @keyframes muSpin{0%{transform:scale(.5) rotate(-200deg);filter:hue-rotate(160deg) brightness(1.3)}60%{transform:scale(1.18) rotate(12deg);filter:hue-rotate(40deg) brightness(1.15)}100%{transform:scale(1) rotate(0);filter:none}}
+    @keyframes muPop{0%{transform:scale(.6) rotate(-12deg)}70%{transform:scale(1.1) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+    @keyframes bdGlow{0%,100%{box-shadow:0 0 0 0 rgba(245,184,46,.8)}50%{box-shadow:0 0 0 16px rgba(245,184,46,0)}}
+  </style>
+</helmet>
+<div style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body);color:#2b2416;background:url('assets/meadow.webp') center/cover no-repeat #cfe0b4">
+  <div style="position:absolute;left:0;right:0;bottom:0;height:36%;background:linear-gradient(#7fbfd6,#4f93b3);border-top:5px solid #a9d6e6"></div>
+  <div style="position:absolute;left:50%;bottom:20%;transform:translateX(-50%);width:min(760px,86vw);height:{{ poolH }};border-radius:50% 50% 0 0;background:linear-gradient(#9fd2e3,#5aa4bf);opacity:.9;transition:height .8s ease"></div>
+
+  <div style="position:absolute;left:50%;bottom:4%;transform:translateX(-50%) scale({{ damScale }});transform-origin:50% 100%;transition:transform .7s cubic-bezier(.3,1.3,.5,1),filter .8s ease;filter:{{ damGlow }};width:min(620px,78vw);height:min(30vh,240px);z-index:{{ damZ }}">
+    <sc-for list="{{ dam }}" as="d" hint-placeholder-count="0">
+      <span style="display:{{ d.ghostDisp }};position:absolute;left:{{ d.x }}%;bottom:{{ d.y }}%;width:{{ d.w }}%;height:30%;transform:translateX(-50%);border-radius:999px;border:3px dashed rgba(90,60,25,.7);background:rgba(166,124,72,.22)"></span>
+      <span style="position:absolute;left:{{ d.x }}%;bottom:{{ d.y }}%;width:{{ d.w }}%;height:34%;transform:translateX(-50%) rotate({{ d.rot }}deg);background:url('{{ d.src }}') center/contain no-repeat;opacity:{{ d.op }};outline:{{ d.ghost }};outline-offset:-6px;border-radius:999px"></span>
+    </sc-for>
+    <sc-if value="{{ placing }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ placeLog }}" aria-label="Put the log on the dam" style="position:absolute;left:{{ next.x }}%;bottom:{{ next.y }}%;width:{{ next.w }}%;height:34%;transform:translateX(-50%);border-radius:999px;border:4px dashed #f5b82e;background:rgba(245,184,46,.25);cursor:pointer;animation:bdGlow 1.6s ease-out infinite"></button>
+    </sc-if>
+  </div>
+
+  <div style="position:absolute;left:clamp(10px,2vw,28px);top:clamp(10px,2vh,24px);z-index:6;display:flex;gap:12px;flex-wrap:wrap">
+    <a href="Garden Map v2.dc.html" style="display:flex;align-items:center;gap:10px;min-height:56px;padding:0 24px;border-radius:999px;background:#d6ecc4;border:3px solid #ecdcbc;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(17px,1.8vw,21px);color:#2f281b;white-space:nowrap;text-decoration:none" style-hover="transform:rotate(-2deg) scale(1.04)" style-active="transform:translateY(3px);box-shadow:0 2px 0 #e4d0a6">Garden</a>
+    <span style="display:flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 8px;border-radius:999px;background:#f5dcb8;border:3px solid #ecdcbc;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(17px,1.8vw,21px);color:#2f281b;white-space:nowrap"><span aria-hidden="true" style="display:block;width:44px;height:28px;background:url('uploads/dam_02_birch_log.webp') center/contain no-repeat"></span>{{ logCount }}</span>
+    <sc-if value="{{ hasGroup }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ changeList }}" style="align-self:center;display:flex;align-items:center;gap:6px;min-height:44px;padding:0 14px;border-radius:999px;background:rgba(251,243,226,.8);border:2px solid #e2b48e;font:inherit;font-weight:700;font-size:18px;color:#5d4a2c;cursor:pointer;white-space:nowrap" style-hover="background:#fbf3e2"><span aria-hidden="true"></span>{{ groupName }} · change</button></sc-if>
+  </div>
+
+  <div style="position:absolute;left:clamp(220px,32vw,470px);right:clamp(10px,2vw,28px);top:calc(clamp(10px,2vh,24px) + 62px);z-index:{{ cardZ }};max-width:900px;display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.6vh,16px);padding:clamp(12px,2vh,22px) clamp(14px,2.4vw,30px);border-radius:34px;background:#fffaf1;border:5px solid {{ cardBd }};box-shadow:{{ cardGlow }};transition:box-shadow .4s ease,border-color .4s ease;box-sizing:border-box">
+    <sc-if value="{{ picking }}" hint-placeholder-val="{{ false }}">
+      <span style="align-self:flex-start;display:inline-flex;padding:8px 22px;border-radius:999px;background:#ffd166;color:#4a2e0a;box-shadow:0 5px 0 #e3a92e;font-family:var(--font-heading);font-size:clamp(24px,2.6vw,34px);line-height:1;transform:rotate(-3deg)">Your turn!</span><span style="align-self:flex-start;max-width:100%;box-sizing:border-box;padding:14px 30px;border-radius:999px;background:#2f5f58;box-shadow:0 6px 0 #1f423d;font-family:var(--font-heading);font-size:clamp(26px,3vw,44px);line-height:1.15;color:#ffffff;text-wrap:balance">Pick your word list! ⬇</span>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;align-self:stretch">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+          <button type="button" onClick="{{ g.go }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px;border-radius:26px;background:#fff;border:4px solid {{ g.bd }};box-shadow:0 5px 0 #e4d0a6;font:inherit;cursor:pointer"><span style="font-family:var(--font-heading);font-size:clamp(24px,2.8vw,32px);color:#2f281b">{{ g.name }}</span><span style="font-size:18px;font-weight:800;color:#5d4a2c;white-space:nowrap">{{ g.sub }}</span></button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{ looking }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:clamp(16px,3vw,36px);flex-wrap:wrap;justify-content:center">
+        <span style="padding:clamp(8px,1.6vh,16px) clamp(28px,4vw,56px);border-radius:28px;background:#fff;border:3px solid #ecdcbc;font-family:var(--font-heading);font-size:clamp(56px,min(9vw,14vh),120px);line-height:1.1;color:#2f281b">{{ lookWord }}</span>
+        <button type="button" onClick="{{ ready }}" style="min-height:80px;padding:0 40px;border-radius:999px;background:#ffd166;color:#4a2e0a;border:0;box-shadow:0 6px 0 #e3a92e,0 12px 22px rgba(214,150,40,.28);font-family:var(--font-heading);font-weight:400;font:inherit;font-weight:900;font-size:clamp(22px,2.6vw,30px);cursor:pointer;white-space:nowrap">Hide it and spell!</button>
+      </div>
+    </sc-if>
+    <sc-if value="{{ spelling }}" hint-placeholder-val="{{ false }}">
+      <span style="align-self:flex-start;display:inline-flex;padding:8px 22px;border-radius:999px;background:#ffd166;color:#4a2e0a;box-shadow:0 5px 0 #e3a92e;font-family:var(--font-heading);font-size:clamp(24px,2.6vw,34px);line-height:1;transform:rotate(-3deg)">Your turn!</span><span style="align-self:flex-start;max-width:100%;box-sizing:border-box;padding:14px 30px;border-radius:999px;background:#2f5f58;box-shadow:0 6px 0 #1f423d;font-family:var(--font-heading);font-size:clamp(26px,3vw,44px);line-height:1.15;color:#ffffff;text-wrap:balance">Fix the mixed-up word! ⬇</span>
+      <div style="display:flex;align-items:center;gap:clamp(14px,3vw,36px);flex-wrap:wrap;justify-content:center">
+        
+        <div style="display:flex;gap:clamp(6px,1vw,12px)">
+          <sc-for list="{{ slots }}" as="s" hint-placeholder-count="3">
+            <button type="button" onClick="{{ s.go }}" aria-label="Take this letter back" style="display:grid;place-items:center;padding:0;width:clamp(58px,min(8.5vw,12vh),96px);height:clamp(68px,min(9.5vw,14vh),110px);border-radius:20px;background:{{ s.bg }};border:4px solid {{ s.bd }};font-family:var(--font-heading);font-size:clamp(44px,min(6.6vw,10vh),78px);line-height:1;color:{{ s.fg }};cursor:{{ s.cur }};animation:{{ s.anim }}">{{ s.ch }}</button>
+          </sc-for>
+        </div>
+        <sc-if value="{{ missed }}" hint-placeholder-val="{{ false }}"><div role="status" style="flex-basis:100%;display:flex;justify-content:center"><span style="display:flex;align-items:center;gap:12px;padding:12px 28px;border-radius:999px;background:#ffe2c2;border:4px solid #e07a2e;animation:muPop .35s ease-out;font-family:var(--font-heading);font-size:clamp(22px,2.6vw,32px);color:#7a3a10">Not quite! Try a new order.</span></div></sc-if>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2vh,18px);align-self:stretch">
+      <div style="display:flex;gap:clamp(6px,1vw,14px);flex-wrap:nowrap;justify-content:center;width:100%">
+        <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="4">
+          <button key="{{ t.key }}" type="button" onClick="{{ t.go }}" disabled="{{ t.used }}" style="flex:0 1 clamp(74px,min(10.5vw,15vh),124px);min-width:0;aspect-ratio:1;padding:0;border-radius:26px;background:{{ t.bg }};border:4px solid {{ t.bd }};box-shadow:0 5px 0 {{ t.bd }};font-family:var(--font-heading);font-size:clamp(44px,min(7vw,10vh),80px);line-height:1;color:{{ t.fg }};cursor:pointer;opacity:{{ t.op }};animation:{{ t.anim }}">{{ t.ch }}</button>
+        </sc-for>
+        </div>
+      <div style="display:flex;gap:clamp(10px,2vw,24px);flex-wrap:wrap;justify-content:center;align-items:center">
+        <button type="button" onClick="{{ undo }}" aria-label="Undo the last letter" style="display:flex;align-items:center;gap:8px;min-height:clamp(56px,min(7.5vw,11vh),76px);padding:0 28px;border-radius:999px;background:#e9e0f7;color:#2f281b;border:3px solid #ecdcbc;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(20px,2.2vw,26px);cursor:pointer;white-space:nowrap;opacity:{{ undoOp }}" style-active="transform:translateY(3px);box-shadow:0 2px 0 #e4d0a6">Undo</button>
+        <button type="button" onClick="{{ clearAll }}" aria-label="Take all letters back" style="display:flex;align-items:center;gap:8px;min-height:clamp(56px,min(7.5vw,11vh),76px);padding:0 28px;border-radius:999px;background:#fff3c4;color:#2f281b;border:3px solid #ecdcbc;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(20px,2.2vw,26px);cursor:pointer;white-space:nowrap;opacity:{{ undoOp }}" style-active="transform:translateY(3px);box-shadow:0 2px 0 #e4d0a6">Clear</button>
+        <button type="button" onClick="{{ shuffle }}" aria-label="Shuffle the letters" style="position:relative;display:flex;align-items:center;gap:10px;min-height:clamp(66px,min(9vw,13vh),96px);padding:0 34px;align-self:center;border-radius:999px;background:#ffd9a8;color:#5a2e12;border:3px solid #ecdcbc;box-shadow:0 6px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(24px,2.8vw,34px);cursor:pointer;white-space:nowrap" style-hover="transform:rotate(-3deg) scale(1.04)" style-active="transform:translateY(3px) scale(.98);box-shadow:0 2px 0 #e4d0a6">Shuffle!</button>
+        <button type="button" onClick="{{ helpMe }}" style="min-height:60px;align-self:center;padding:0 18px;border-radius:999px;background:none;border:0;color:#5d4a2c;font:inherit;font-weight:800;font-size:clamp(18px,2vw,22px);text-decoration:underline;cursor:pointer;white-space:nowrap">Help me</button>
+      </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ placing }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:16px">
+        <span aria-hidden="true" style="width:clamp(110px,min(16vw,20vh),180px);aspect-ratio:2/1;background:url('{{ earnedSrc }}') center/contain no-repeat"></span>
+        <span style="display:flex;flex-direction:column;gap:12px"><span style="align-self:flex-start;display:inline-flex;padding:8px 22px;border-radius:999px;background:#ffd166;color:#4a2e0a;box-shadow:0 5px 0 #e3a92e;font-family:var(--font-heading);font-size:clamp(24px,2.6vw,34px);line-height:1;transform:rotate(-3deg)">Your turn!</span><span style="align-self:flex-start;max-width:100%;box-sizing:border-box;padding:14px 30px;border-radius:999px;background:#2f5f58;box-shadow:0 6px 0 #1f423d;font-family:var(--font-heading);font-size:clamp(26px,3vw,44px);line-height:1.15;color:#ffffff;text-wrap:balance">Tap the glowing spot on the dam! ⬇</span></span>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ done }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
+        <a href="Garden Map v2.dc.html" style="display:inline-flex;align-items:center;min-height:72px;padding:0 36px;border-radius:999px;background:#ffd166;color:#4a2e0a;border:0;box-shadow:0 6px 0 #e3a92e,0 12px 22px rgba(214,150,40,.28);font-family:var(--font-heading);font-weight:400;font-weight:900;font-size:24px;text-decoration:none">Back to my garden</a>
+        <button type="button" onClick="{{ again }}" class="btn btn-ghost" style="font-size:18px;font-weight:800">Build again</button>
+      </div>
+    </sc-if>
+  </div>
+
+  <sc-if value="{{ bubbleOn }}" hint-placeholder-val="{{ false }}"><div role="status" aria-live="polite" style="animation:bdChat .35s cubic-bezier(.3,1.5,.6,1);transform-origin:20% 100%;position:absolute;left:clamp(8px,1vw,16px);bottom:calc(26% + clamp(150px,min(24vw,44vh),370px));z-index:7;width:min(clamp(260px,38vw,580px),calc(clamp(220px,32vw,470px) - 24px));max-height:calc(74vh - clamp(150px,min(24vw,44vh),370px) - 70px);overflow:visible;box-sizing:border-box;display:flex;flex-direction:column;gap:4px;padding:clamp(12px,2vh,20px) clamp(16px,2vw,24px);border-radius:30px;background:#fffaf1;border:3px solid #ecdcbc;box-shadow:0 6px 0 #e4d0a6">
+    <sc-for list="{{ sayLines }}" as="l" hint-placeholder-count="1"><span style="display:block;font-family:var(--font-heading);font-weight:400;font-size:clamp(26px,min(3vw,4.8vh),44px);line-height:1.25;letter-spacing:.02em;color:#111111;text-wrap:pretty"><sc-for list="{{ l.words }}" as="w" hint-placeholder-count="5"><span onClick="{{ w.go }}" style="display:inline;padding:0 .1em;border-radius:8px;cursor:pointer;background:{{ w.bg }};box-shadow:{{ w.sh }};transition:background 150ms ease,box-shadow 150ms ease">{{ w.t }}</span> </sc-for></span></sc-for>
+    <span aria-hidden="true" style="position:absolute;left:clamp(60px,10vw,150px);bottom:-19px;width:30px;height:30px;transform:rotate(45deg);background:#fffaf1;border-right:3px solid #ecdcbc;border-bottom:3px solid #ecdcbc"></span>
+  </div></sc-if>
+  {{ beaverNode }}
+  <div aria-hidden="true" style="position:absolute;inset:0;z-index:8;background:rgba(70,70,62,.32);backdrop-filter:grayscale(.7);-webkit-backdrop-filter:grayscale(.7);pointer-events:none;opacity:{{ dimOp }};transition:opacity .5s ease"></div>
+  {{ celeNode }}
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="pointer-events:none;position:fixed;left:{{ toastX }};top:{{ toastY }};transform:translate(-50%,-100%);width:max-content;max-width:min(640px,calc(100vw - 32px));box-sizing:border-box;padding:18px 32px;border-radius:32px;background:#fffaf1;border:4px solid #ffd166;box-shadow:0 6px 0 #e3a92e,0 16px 30px rgba(80,55,20,.25);color:#111111;font-weight:800;font-size:clamp(24px,2.6vw,34px);line-height:1.3;text-align:center;text-wrap:balance;z-index:480">{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;followAlong&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Reading&quot;},&quot;readPace&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:750,&quot;min&quot;:400,&quot;max&quot;:1500,&quot;step&quot;:50,&quot;unit&quot;:&quot;ms/word&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Reading&quot;}}">
+if (!window.__wkPt) { window.__wkPt = 1; window.addEventListener('pointerdown', e => { window.__lastPt = { x: e.clientX, y: e.clientY }; }, true); }
+const KEY = 'unscramble.v1';
+const PAL = [['#ffd6d1', '#c8503f'], ['#ffe7a8', '#b9851a'], ['#cfeec0', '#4f8a3a'], ['#c9e6f7', '#2f7fb0'], ['#e6d6f7', '#7a52b0'], ['#ffd9b8', '#c46a2a'], ['#d3f1ea', '#2e8a78'], ['#f9d3e6', '#b04a7e']];
+const B1 = 'uploads/05_IMAGES/Batch_01_Individual_PNGs/', B2 = 'uploads/05_IMAGES/Batch_02_Individual_PNGs/';
+const BLANK = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+const GROUPS = {
+  '2A': 'saw home soon stand box upon first came girl house find because made could book look mother run school people night into say think back',
+  '2B': 'big where am ball morning live four last color away red friend pretty eat want year white got play found left men bring wish black',
+  '2C': 'may let use these right present tell next please leave hand more why better under while should never each best another seem tree name dear',
+  '2D': 'ran five read over such way too shall own most sure thing only near than open kind must high far both end also until call'
+};
+Object.keys(GROUPS).forEach(k => { GROUPS[k] = GROUPS[k].split(' '); });
+const N = 25;
+const LOGS = ['dam_01_mossy_bark_log', 'dam_02_birch_log', 'dam_03_branching_log', 'dam_04_twig_bundle', 'dam_05_round_wood_slice', 'dam_06_hollow_log', 'dam_07_forked_branch', 'dam_08_smooth_log_mushrooms', 'dam_09_branch_bundle_reeds'].map(n => 'uploads/' + n + '.webp');
+const SPOTS = []; [7, 6, 5, 4, 3].forEach((n, row) => { for (let j = 0; j < n; j++) SPOTS.push([50 + (j - (n - 1) / 2) * 13.4, row * 19, 15, ((j + row) % 3 - 1) * 3]); });
+const EXTRA = 'aeimprst';
+const rnd = n => { const x = Math.sin(n * 91.7) * 43758.5; return x - Math.floor(x); };
+
+class Component extends DCLogic {
+  rwW(key, text, on) { const W = this.state.rw || {}, words = String(text).split(' '); if (on === false) return words.map(w => ({ t: w, bg: 'transparent', sh: 'none' })); this._rwQ = { k: key, words, pace: +(this.props.readPace ?? 750) }; if (!this._rwOn) { this._rwOn = 1; this._rwT = setTimeout(() => this._rwKick(), 500); } return words.map((w, i) => { const cur = this.props.followAlong !== false && W.k === key && W.i === i; return { t: w, bg: cur ? '#ffd400' : 'transparent', sh: cur ? '0 0 0 5px #ffd400' : 'none', go: () => { this.setState({ rw: { k: key, i } }); clearTimeout(this._rwT); this._rwT = setTimeout(() => this._rwKick(), this._rwDur(this._rwQ, i)); } }; }); }
+  _rwDur(q, i) { const w = (q && q.words[i]) || ''; return q.pace * (0.75 + Math.min(w.length, 10) * 0.05) + (/[.!?,:]$/.test(w) ? q.pace * 0.6 : 0); }
+  _rwKick() { clearTimeout(this._rwT); const q = this._rwQ, W = this.state.rw || {}; if (!q) { this._rwT = setTimeout(() => this._rwKick(), 300); return; }
+    if (W.k !== q.k) { this.setState({ rw: { k: q.k, i: 0 } }); this._rwT = setTimeout(() => this._rwKick(), this._rwDur(q, 0) + 300); return; }
+    if (W.i < q.words.length - 1) { const i = W.i + 1; this.setState({ rw: { k: q.k, i } }); this._rwT = setTimeout(() => this._rwKick(), this._rwDur(q, i)); return; }
+    if (W.i === q.words.length - 1) this.setState({ rw: { k: q.k, i: q.words.length } });
+    this._rwT = setTimeout(() => this._rwKick(), 300); }
+  constructor(p) {
+    super(p);
+    let sv = null; try { sv = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+    const prog = (sv && sv.prog) || {}, group = sv && sv.group;
+    this.state = { prog, group: group || null, logs: group ? prog[group] || 0 : 0, typed: 0, used: [], phase: !group ? 'pick' : (prog[group] || 0) >= N ? 'done' : 'spell', wrong: -1, toast: '', mode: 'jumble' };
+  }
+  save(group, logs) { const prog = { ...this.state.prog, [group]: logs }; try { localStorage.setItem(KEY, JSON.stringify({ group, prog })); } catch (e) {} return prog; }
+  speak(t) {
+    const ss = window.speechSynthesis; if (!ss || !window.SpeechSynthesisUtterance) { this.toastMsg('Sound is not working on this device.'); return; }
+    try {
+      if (ss.speaking || ss.pending) ss.cancel();
+      ss.resume();
+      const u = new SpeechSynthesisUtterance(String(t));
+      const vs = ss.getVoices(), v = vs.find(x => /^en(-|_)US/i.test(x.lang) && /samantha|google us|aria|jenny|zira/i.test(x.name)) || vs.find(x => /^en(-|_)/i.test(x.lang));
+      if (v) u.voice = v; u.lang = (v && v.lang) || 'en-US'; u.rate = 0.75; u.pitch = 1; u.volume = 1;
+      u.onstart = () => this.setState({ talking: true });
+      u.onend = u.onerror = () => this.setState({ talking: false });
+      this._utt = u; ss.speak(u);
+      clearTimeout(this.spT); this.spT = setTimeout(() => { if (!ss.speaking && !this.state.talking) { ss.cancel(); ss.speak(u); } }, 400);
+    } catch (e) { this.toastMsg('Sound is not working on this device.'); }
+  }
+  toastMsg(t) { clearTimeout(this.tt); const p = window.__lastPt || { x: window.innerWidth / 2, y: window.innerHeight / 2 }, hw = Math.min(320, window.innerWidth / 2 - 16); this.setState({ toast: t, toastPos: { x: Math.max(16 + hw, Math.min(window.innerWidth - 16 - hw, p.x)), y: Math.max(140, Math.min(window.innerHeight - 24, p.y - 40)) } }); this.tt = setTimeout(() => this.setState({ toast: '' }), 2400); }
+  componentWillUnmount() { clearTimeout(this._rwT); clearTimeout(this.tt); clearTimeout(this.wt); clearTimeout(this.spT); clearTimeout(this.ct); clearTimeout(this.mt); clearTimeout(this.bt); try { window.speechSynthesis.cancel(); } catch (e) {} }
+  tilesFor(i) {
+    const w = GROUPS[this.state.group][i], pool = 'abcdefghilmnoprstuwy'.split('').filter(c => w.indexOf(c) < 0), nx = w.length <= 3 ? 3 : w.length <= 5 ? 3 : 2, extra = Array.from({ length: nx }, (_, k) => pool[Math.floor(rnd(i * 7 + k + 1) * pool.length)]).filter((c, k, a) => a.indexOf(c) === k), all = this.state.mode === 'jumble' ? w.split('') : w.split('').concat(extra);
+    let out = all.map((c, k) => ({ c, r: rnd(i * 13 + k) })).sort((a, b) => a.r - b.r).map(x => x.c);
+    if (out.slice(0, w.length).join('') === w || out.join('') === all.join('')) out = out.slice(1).concat(out[0]);
+    if (out.slice(0, w.length).join('') === w) out = out.reverse();
+    return out;
+  }
+  tap(k) {
+    const S = this.state, w = GROUPS[S.group][S.logs], tiles = this.tilesFor(S.logs);
+    if (S.miss || S.used.indexOf(k) > -1 || S.used.length >= w.length) return;
+    const used = S.used.concat([k]), typed = used.length;
+    if (typed < w.length) { this.setState({ used, typed }); return; }
+    if (used.map(j => tiles[j]).join('') === w) { this.setState({ typed, used, phase: 'place', wrong: -1, cele: Date.now(), ord: null }); clearTimeout(this.ct); clearTimeout(this.mt); clearTimeout(this.bt); this.ct = setTimeout(() => this.setState({ cele: 0 }), 3400); }
+    else { this.setState({ used, typed, miss: Date.now() }); this.mood('try'); clearTimeout(this.wt); this.wt = setTimeout(() => this.setState({ used: [], typed: 0, miss: 0 }), 1600); }
+  }
+  untap(j) { const S = this.state; if (S.miss) return; if (j >= S.used.length) return; const used = S.used.filter((_, x) => x !== j); this.setState({ used, typed: used.length }); }
+  shuffle() { const n = this.tilesFor(this.state.logs).length, cur = this.state.ord || Array.from({ length: n }, (_, k) => k); let nx;
+    for (let tries = 0; tries < 8; tries++) { nx = cur.slice(); for (let a = nx.length - 1; a > 0; a--) { const b = Math.floor(Math.random() * (a + 1)); [nx[a], nx[b]] = [nx[b], nx[a]]; } if (nx.join() !== cur.join()) break; }
+    this.setState({ ord: nx, shufN: (this.state.shufN || 0) + 1 }); }
+  componentDidUpdate() { if (this._say !== this._shownSay) { this._shownSay = this._say; clearTimeout(this.bt); if (!this.state.bubble) this.setState({ bubble: true }); this.bt = setTimeout(() => this.setState({ bubble: false }), this._say ? this._say.split(' ').length * 850 + 2500 : 3600); } }
+  componentDidMount() { this.componentDidUpdate(); }
+  mood(m) { clearTimeout(this.mt); this.setState({ mood: m, moodN: (this.state.moodN || 0) + 1 }); this.mt = setTimeout(() => this.setState({ mood: null }), m === 'try' ? 3200 : 1500); }
+  pickGroup(gk) { const logs = this.state.prog[gk] || 0; try { localStorage.setItem(KEY, JSON.stringify({ group: gk, prog: this.state.prog })); } catch (e) {} this.setState({ group: gk, logs, typed: 0, used: [], phase: logs >= N ? 'done' : 'spell' }); }
+  renderVals() {
+    const S = this.state, gk = S.group, list = gk ? GROUPS[gk] : [], i = Math.min(S.logs, N - 1), w = list[i] || '', tiles = gk ? this.tilesFor(i) : [];
+    const ph = S.phase, picking = ph === 'pick', looking = ph === 'look', spelling = ph === 'spell', placing = ph === 'place', done = ph === 'done';
+    const MOODSAY = { try: ['Hmm, not that one! The letters will come back. Try again!', 'So close! Try a new order.', 'Tap Shuffle to see the letters a new way!'], yes: ['Yes! Keep going!', 'Great job! Next letter!', 'You got it! Keep going!'], oops: ['Almost! Try another letter.', 'So close! You can do it.', 'Oops! Try a different one.'], help: ['Here is a hint for you!'] };
+    const moodSay = spelling && S.mood ? MOODSAY[S.mood][(S.moodN || 0) % MOODSAY[S.mood].length] : '';
+    const say = moodSay ? moodSay : picking ? 'Hi friend! Pick your word list.' : done ? 'We did it! We built a dam! The water is a pond now.' : placing ? 'You fixed the mixed-up word! Put your log on the dam.' : (S.logs ? 'Great job! ' : 'Oh no! My words got mixed up! ') + (S.mode === 'jumble' ? 'Tap the letters to make a word.' : 'Listen to the word. Then spell it!');
+    const dam = SPOTS.map(([x, y, wd, rot], k) => ({ x, y, w: wd, rot, src: LOGS[k % LOGS.length], op: k < S.logs ? 1 : 0, ghost: 'none', ghostDisp: k < S.logs || picking ? 'none' : 'block' }));
+    const nx = SPOTS[Math.min(S.logs, N - 1)];
+    return {
+      bubbleOn: (this._say = say, !!S.bubble || S.phase === 'pick'), say, sayLines: (() => { const ls = (say.match(/[^.!?]+[.!?]+/g) || [say]).map(t => t.trim()), all = this.rwW('say|' + say, ls.join(' ')); let p = 0; return ls.map(t => { const n = t.split(' ').length, words = all.slice(p, p + n); p += n; return { t, words }; }); })(), picking, looking, spelling, placing, done,
+      groups: Object.keys(GROUPS).map(k => ({ name: 'Group ' + k, sub: (S.prog[k] || 0) + ' of ' + N + ' logs', bd: k === gk ? '#f5b82e' : '#ecdcbc', go: () => this.pickGroup(k) })),
+      changeList: () => this.setState({ phase: 'pick' }), hasGroup: !!gk && !picking, groupName: gk ? 'Group ' + gk : '',
+      modes: [['hear', '', 'Hear & spell'], ['jumble', '', 'Unscramble']].map(([id, ic, label]) => { const on = (S.mode || 'hear') === id; return { ic, label, bg: on ? 'var(--color-accent-2-700)' : '#fff', fg: on ? '#fff' : '#2f281b', bd: on ? '#ecdcbc' : '#c9b58e', go: () => { if (on) return; try { localStorage.setItem(KEY + '.mode', id); } catch (e) {} this.setState({ mode: id, typed: 0, used: [], wrong: -1 }); } }; }),
+      lookWord: w, ready: () => this.setState({ phase: 'spell' }), peek: () => this.setState({ phase: 'look' }),
+      slots: w.split('').map((c, k) => ({ ch: k < S.used.length ? tiles[S.used[k]] : '', fg: k < S.used.length ? PAL[S.used[k] % PAL.length][1] : '#2f281b', bg: S.miss ? '#ffe2c2' : k < S.used.length ? PAL[S.used[k] % PAL.length][0] : '#fff', anim: S.miss ? 'muWob .5s ease-in-out ' + (k * 0.06).toFixed(2) + 's 2' : 'none', bd: S.miss ? '#e07a2e' : k === S.used.length && spelling ? '#f5b82e' : '#ecdcbc', cur: k < S.used.length ? 'pointer' : 'default', go: () => this.untap(k) })),
+      tiles: (S.ord && S.ord.length === tiles.length ? S.ord : tiles.map((_, k) => k)).map(k => { const used = S.used.indexOf(k) > -1; const p = PAL[k % PAL.length]; return { key: k + '-' + (S.shufN || 0), ch: tiles[k], used, op: used ? 0.25 : 1, bg: p[0], bd: p[1], fg: p[1], anim: S.shufN ? 'muSpin .6s cubic-bezier(.3,1.4,.5,1) ' + (k * 0.05).toFixed(2) + 's both' : 'none', go: () => this.tap(k) }; }),
+      shuffle: () => this.shuffle(),
+      canUndo: S.used.length > 0 && !S.miss, undoOp: S.used.length > 0 && !S.miss ? 1 : 0.4,
+      undo: () => { if (S.miss || !S.used.length) return; const used = S.used.slice(0, -1); this.setState({ used, typed: used.length }); },
+      clearAll: () => { if (S.miss || !S.used.length) return; this.setState({ used: [], typed: 0 }); },
+      helpMe: () => { this.mood('help'); let keep = 0; while (keep < S.used.length && tiles[S.used[keep]] === w[keep]) keep++; const used = S.used.slice(0, keep); const k = tiles.findIndex((c, j) => c === w[keep] && used.indexOf(j) < 0); if (k < 0) return; this.setState({ used, typed: keep }, () => this.tap(k)); },
+      hearWord: () => this.speak(w),
+      hear: () => this.speak(picking || placing || done ? say : w + '. ' + w.split('').join(', ') + '. ' + w),
+      dam, next: { x: nx[0], y: nx[1], w: nx[2] },
+      earnedSrc: LOGS[Math.min(S.logs, N - 1) % LOGS.length],
+      placeLog: () => { const logs = S.logs + 1, prog = this.save(gk, logs); this.setState({ prog, logs, typed: 0, used: [], ord: null, shufN: 0, phase: logs >= N ? 'done' : 'spell' }); this.toastMsg(logs >= N ? 'The dam is done! Water fills up behind it.' : 'The dam is getting taller!'); },
+      again: () => { const prog = this.save(gk, 0); this.setState({ prog, logs: 0, typed: 0, used: [], phase: 'spell' }); },
+      damScale: placing ? 1.25 : done ? 1.15 : 0.72, damZ: placing || done ? 8 : 3,
+      damGlow: (() => { const p = S.logs / N; if (p <= 0) return 'none'; const a = (0.25 + p * 0.65).toFixed(2), b = Math.round(6 + p * 26); return 'drop-shadow(0 0 ' + b + 'px rgba(255,214,90,' + a + ')) saturate(' + (1 + p * 0.3).toFixed(2) + ') brightness(' + (1 + p * 0.12).toFixed(2) + ')'; })(),
+      missed: !!S.miss,
+      cardZ: spelling ? 9 : 5, dimOp: spelling ? 1 : 0, cardBd: S.miss ? '#e07a2e' : spelling ? '#f5b82e' : '#e2b48e', cardGlow: spelling ? '0 0 0 6px rgba(255,236,170,.75), 0 0 46px 10px rgba(255,214,90,.6), 0 18px 40px rgba(0,0,0,.35)' : 'var(--shadow-lg)',
+      logCount: S.logs + ' of ' + N + ' logs',
+      poolH: (4 + S.logs * 1.25) + '%',
+      beaverNode: (() => { const pose = S.cele || done ? 10 : placing ? 6 : picking ? 7 : S.mood === 'yes' ? 1 : S.mood === 'oops' ? 3 : S.mood === 'try' ? 4 : S.mood === 'help' ? 8 : 2;
+        return React.createElement('img', { key: 'bv' + pose + '-' + (S.moodN || 0), src: 'assets/bv' + pose + '.webp', alt: 'Beaver', style: { position: 'absolute', left: 'clamp(0px,1vw,16px)', bottom: '26%', zIndex: 6, width: 'clamp(170px,min(26vw,48vh),400px)', height: 'auto', filter: 'drop-shadow(0 10px 12px rgba(60,40,10,.35))', transformOrigin: '50% 100%', animation: 'bdHop .5s ease-out', pointerEvents: 'none' } }); })(),
+      toastX: ((S.toastPos || {}).x || window.innerWidth / 2) + 'px', toastY: ((S.toastPos || {}).y || 300) + 'px', hasToast: !!S.toast, toast: S.toast,
+      celeNode: S.cele ? (() => { const h = React.createElement, C = ['#f5b82e', '#e0584a', '#6fbf5a', '#4f93b3', '#c67139', '#b07ad6', '#ffffff'];
+        return h('div', { key: 'c' + S.cele, style: { position: 'fixed', inset: 0, zIndex: 20, pointerEvents: 'none', overflow: 'hidden' } },
+          ...Array.from({ length: 70 }, (_, k) => h('span', { key: 'f' + k, style: { position: 'absolute', left: (rnd(k + 1) * 100) + '%', top: 0, width: 8 + rnd(k + 2) * 8, height: 12 + rnd(k + 3) * 10, borderRadius: k % 3 ? 3 : 999, background: C[k % C.length], '--dx': ((rnd(k + 4) - 0.5) * 30) + 'vw', '--rot': (360 + rnd(k + 5) * 720) + 'deg', animation: 'bdConf ' + (1.8 + rnd(k + 6) * 1.4) + 's ' + (rnd(k + 7) * 0.5) + 's cubic-bezier(.3,.6,.5,1) forwards', opacity: 0 } })),
+                    h('span', { key: 'w', style: { position: 'absolute', left: '50%', top: '26%', padding: '18px 48px', borderRadius: 999, background: '#fbf3e2', border: '3px solid #ecdcbc', boxShadow: '0 8px 0 #e4d0a6', fontFamily: 'var(--font-heading)', fontSize: 'clamp(40px,7vw,96px)', color: '#2f281b', whiteSpace: 'nowrap', animation: 'bdPop 2.6s ease-out forwards' } }, w));
+      })() : null
+    };
+  }
+}
+</script>
+</body>
+</html>

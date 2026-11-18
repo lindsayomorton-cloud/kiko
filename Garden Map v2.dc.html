@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+  <script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+  <style>
+    html,body{margin:0;height:100%;overflow:hidden;background:#f5ead8}
+    a{color:var(--color-accent-700)} a:hover{color:var(--color-accent-800)}
+    @keyframes gmFlow{to{stroke-dashoffset:-40}}
+    @keyframes gmGlow{0%,100%{box-shadow:0 0 0 0 rgba(245,184,46,.7)}50%{box-shadow:0 0 0 14px rgba(245,184,46,0)}}
+  </style>
+</helmet>
+<div style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body);color:#2b2416;background:url('assets/meadow.webp') center/cover no-repeat #cfe0b4">
+  <div style="position:absolute;inset:0;background:rgba(245,234,216,.18)"></div>
+  {{ streamLayer }}
+
+  <div style="position:absolute;left:clamp(14px,3vw,40px);top:clamp(14px,3vh,32px);z-index:5;display:flex;flex-direction:column;gap:6px;padding:14px 22px;border-radius:28px;background:rgba(251,243,226,.94);border:3px solid #e2b48e;box-shadow:var(--shadow-md);max-width:min(460px,80vw)">
+    <span style="font-family:var(--font-heading);font-size:clamp(28px,3.6vw,46px);line-height:1.1;color:#2f281b;white-space:nowrap">My Pond Garden</span>
+    <span style="font-size:clamp(22px,2.2vw,28px);font-weight:700;color:#111111">{{ subtitle }}</span>
+  </div>
+
+  <sc-for list="{{ plots }}" as="p" hint-placeholder-count="6">
+    <div style="position:absolute;left:{{ p.x }}%;top:{{ p.y }}%;width:0;height:0;z-index:3">
+      <sc-if value="{{ p.built }}" hint-placeholder-val="{{ false }}">
+        <button type="button" onClick="{{ p.go }}" aria-label="{{ p.name }}" style="position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:clamp(84px,min(12vw,15vh),170px);aspect-ratio:1;border-radius:999px;border:5px solid {{ p.ring }};background:url('{{ p.src }}') center/118% no-repeat #9cc5bf;box-shadow:0 10px 24px rgba(60,40,10,.35);cursor:pointer;padding:0;animation:{{ p.glow }}">
+          <span style="position:absolute;right:-6px;top:-6px;display:{{ p.badgeDisp }};padding:6px 12px;border-radius:999px;background:#f5b82e;border:3px solid #ecdcbc;font-weight:900;font-size:18px">{{ p.badge }}</span>
+        </button>
+        <span style="position:absolute;left:0;top:calc(clamp(84px,min(12vw,15vh),170px) / 2 + 6px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;padding:4px 14px;border-radius:18px;background:rgba(251,243,226,.95);border:3px solid #e2b48e;white-space:nowrap;line-height:1.15"><span style="font-weight:900;font-size:clamp(20px,1.9vw,24px);color:#111111">{{ p.name }}</span><span style="font-weight:800;font-size:18px;color:#5d4a2c">{{ p.status }}</span></span>
+      </sc-if>
+      <sc-if value="{{ p.empty }}" hint-placeholder-val="{{ true }}">
+        <button type="button" onClick="{{ p.go }}" aria-label="Dig a new pond here" style="position:absolute;left:0;top:0;transform:translate(-50%,-50%);width:clamp(84px,min(12vw,15vh),170px);aspect-ratio:1;border-radius:999px;border:4px dashed rgba(90,60,25,.75);background:rgba(166,124,72,.32);display:grid;place-items:center;cursor:pointer;padding:0">
+          <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><span aria-hidden="true" style="display:block;width:clamp(48px,min(6vw,9vh),84px);aspect-ratio:1;background:url('assets/shovel.webp') center/contain no-repeat"></span><span style="font-weight:900;font-size:18px;white-space:nowrap;color:#3a2a14;background:rgba(251,243,226,.9);padding:2px 8px;border-radius:999px">Dig here</span></span>
+        </button>
+      </sc-if>
+    </div>
+  </sc-for>
+
+  <sc-for list="{{ links }}" as="l" hint-placeholder-count="0">
+    <button type="button" onClick="{{ l.go }}" style="position:absolute;left:{{ l.x }}%;top:{{ l.y }}%;transform:translate(-50%,-50%);z-index:4;display:flex;align-items:center;gap:6px;min-height:64px;padding:0 26px;border-radius:999px;background:#dcecf6;border:3px solid #9cc5dc;box-shadow:0 5px 0 #7fb0cc;color:#1f4f70;font-family:var(--font-heading);font-size:22px;cursor:pointer;white-space:nowrap;box-shadow:var(--shadow-sm)"><span aria-hidden="true"></span>Add a stream</button>
+  </sc-for>
+
+  <div style="position:absolute;right:clamp(14px,3vw,40px);top:clamp(14px,3vh,32px);z-index:5;display:flex;align-items:center;gap:12px">
+    <a href="App v2.dc.html#realms" class="btn btn-secondary" style="min-height:56px;font-size:18px;font-weight:800;text-decoration:none;white-space:nowrap">← All realms</a>
+  </div>
+  <a href="Beaver Dam v2.dc.html" style="text-decoration:none;color:inherit;position:absolute;right:clamp(14px,3vw,40px);top:calc(clamp(14px,3vh,32px) + 72px);z-index:5;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 8px;border-radius:999px;background:rgba(251,243,226,.94);border:3px solid #e2b48e;box-shadow:var(--shadow-md)">
+    <span aria-hidden="true" style="width:60px;height:60px;border-radius:999px;background:url('assets/beaver.webp') center/contain no-repeat #fff;border:3px solid #e2b48e"></span>
+    <span style="display:flex;flex-direction:column"><span style="font-family:var(--font-heading);font-size:26px;color:#2f281b">Beaver Dam →</span><span style="font-size:18px;font-weight:800;color:#6b5c40">Look, spell, build a dam</span></span>
+  </a>
+  <a href="Mixed-Up Words v2.dc.html" style="text-decoration:none;color:inherit;position:absolute;right:clamp(14px,3vw,40px);top:calc(clamp(14px,3vh,32px) + 160px);z-index:5;display:flex;align-items:center;gap:12px;padding:8px 18px 8px 8px;border-radius:999px;background:rgba(251,243,226,.94);border:3px solid #e2b48e;box-shadow:var(--shadow-md)">
+    <span aria-hidden="true" style="width:60px;height:60px;border-radius:999px;background:url('assets/beaver.webp') center/contain no-repeat #fff;border:3px solid #e2b48e"></span>
+    <span style="display:flex;flex-direction:column"><span style="font-family:var(--font-heading);font-size:26px;color:#2f281b">Mixed-Up Words →</span><span style="font-size:18px;font-weight:800;color:#6b5c40">Unscramble letters</span></span>
+  </a>
+
+  <sc-if value="{{ picking }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closePick }}" style="position:fixed;inset:0;z-index:20;display:grid;place-items:center;padding:16px;background:rgba(70,70,62,.4);backdrop-filter:grayscale(.7);-webkit-backdrop-filter:grayscale(.7)">
+      <div onClick="{{ stop }}" role="dialog" aria-label="Pick a pond" style="width:min(980px,100%);max-height:calc(100vh - 32px);overflow:auto;display:flex;flex-direction:column;gap:20px;padding:clamp(18px,3vw,36px);border-radius:36px;background:transparent;border:0">
+        <span style="align-self:flex-start;display:inline-flex;padding:8px 22px;border-radius:999px;background:#ffd166;color:#4a2e0a;box-shadow:0 5px 0 #e3a92e;font-family:var(--font-heading);font-size:clamp(24px,2.6vw,34px);line-height:1;transform:rotate(-3deg)">Your turn!</span><span style="align-self:flex-start;max-width:100%;box-sizing:border-box;padding:14px 30px;border-radius:999px;background:#2f5f58;box-shadow:0 6px 0 #1f423d;font-family:var(--font-heading);font-size:clamp(26px,3vw,44px);line-height:1.15;color:#ffffff;text-wrap:balance">Pick a pond to build! ⬇</span>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px">
+          <sc-for list="{{ types }}" as="t" hint-placeholder-count="4">
+            <button type="button" onClick="{{ t.go }}" style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px;border-radius:28px;background:#fff;border:4px solid {{ t.bd }};font:inherit;cursor:pointer;opacity:{{ t.op }};text-align:center">
+              <span aria-hidden="true" style="display:grid;place-items:center;width:100%;aspect-ratio:4/3;border-radius:20px;background:url('{{ t.src }}') center/contain no-repeat #e6f2ef;font-size:72px;line-height:1">{{ t.emo }}</span>
+              <span style="font-family:var(--font-heading);font-size:clamp(22px,2.4vw,28px);color:#2f281b">{{ t.name }}</span>
+              <span style="font-size:clamp(20px,1.9vw,24px);font-weight:700;color:#111111;line-height:1.3">{{ t.sub }}</span>
+              <span style="display:{{ t.soonDisp }};position:absolute;top:12px;right:12px;padding:4px 12px;border-radius:999px;background:#efe3cc;border:2px solid #b49a6c;font-size:18px;font-weight:900;color:#5d4a26">Coming next</span>
+            </button>
+          </sc-for>
+        </div>
+        <button type="button" onClick="{{ closePick }}" style="align-self:flex-start;min-height:64px;padding:0 30px;border-radius:999px;background:#fffaf1;border:3px solid #ecdcbc;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-heading);font-size:22px;color:#2b2416;cursor:pointer">Not now</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="pointer-events:none;position:fixed;left:{{ toastX }};top:{{ toastY }};transform:translate(-50%,-100%);width:max-content;max-width:min(640px,calc(100vw - 32px));box-sizing:border-box;padding:18px 32px;border-radius:32px;background:#fffaf1;border:4px solid #ffd166;box-shadow:0 6px 0 #e3a92e,0 16px 30px rgba(80,55,20,.25);color:#111111;font-weight:800;font-size:clamp(24px,2.6vw,34px);line-height:1.3;text-align:center;text-wrap:balance;z-index:480">{{ toast }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+if (!window.__wkPt) { window.__wkPt = 1; window.addEventListener('pointerdown', e => { window.__lastPt = { x: e.clientX, y: e.clientY }; }, true); }
+const GKEY = 'ecosystemBuilder.garden.v1';
+const STORE = 'ecosystemBuilder.koiPond.v3';
+const B1 = 'uploads/05_IMAGES/Batch_01_Individual_PNGs/', B2 = 'uploads/05_IMAGES/Batch_02_Individual_PNGs/';
+const POND_SRC = B1 + 'hand_painted_koi_pond_waterfall.webp';
+const SLOTS = [{ x: 14, y: 69 }, { x: 38, y: 68 }, { x: 62, y: 69 }, { x: 86, y: 68 }, { x: 26, y: 83 }, { x: 74, y: 83 }];
+const NEAR = [[0, 1], [1, 2], [2, 3], [0, 4], [1, 4], [2, 5], [3, 5]];
+const TYPES = [
+  { id: 'koi', name: 'Koi pond', sub: 'Big fish and clean-water machines.', src: B1 + 'watercolor_kohaku_koi_fish.webp', ready: 1 },
+  { id: 'wildlife', name: 'Wildlife pond', sub: 'No machines. Bugs, birds and dragonflies.', src: B2 + 'watercolor_dragonfly_nymph_isolated.webp' },
+  { id: 'frog', name: 'Frog pond', sub: 'Shallow edges for frogs and newts.', emo: '' },
+  { id: 'bog', name: 'Bog garden', sub: 'Wet soil and thirsty plants.', src: B1 + 'watercolor_pickerelweed_cluster.webp' }
+];
+const keyOf = id => id === 'p1' ? STORE : STORE + '.' + id;
+const readPond = id => { try { return JSON.parse(localStorage.getItem(keyOf(id))); } catch (e) { return null; } };
+
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    let gd = null; try { gd = JSON.parse(localStorage.getItem(GKEY)); } catch (e) {}
+    gd = gd && gd.plots ? gd : { plots: {}, streams: [] };
+    gd.plots[0] = gd.plots[0] || { id: 'p1', type: 'koi' };
+    this.state = { gd, pick: null, toast: '' };
+  }
+  save(gd) { try { localStorage.setItem(GKEY, JSON.stringify(gd)); } catch (e) {} this.setState({ gd }); }
+  toastMsg(t) { clearTimeout(this.tt); const p = window.__lastPt || { x: window.innerWidth / 2, y: window.innerHeight / 2 }, hw = Math.min(320, window.innerWidth / 2 - 16); this.setState({ toast: t, toastPos: { x: Math.max(16 + hw, Math.min(window.innerWidth - 16 - hw, p.x)), y: Math.max(140, Math.min(window.innerHeight - 24, p.y - 40)) } }); this.tt = setTimeout(() => this.setState({ toast: '' }), 3200); }
+  componentWillUnmount() { clearTimeout(this.tt); }
+  open(id) { location.href = 'Ecosystem Builder.dc.html?realm=koi&intro=done' + (id === 'p1' ? '' : '&pond=' + id); }
+  renderVals() {
+    const S = this.state, gd = S.gd, P = gd.plots;
+    const n = Object.keys(P).length;
+    const info = i => { const pl = P[i]; if (!pl) return null; const sv = readPond(pl.id), done = (sv && sv.done) || {}; const finished = !!(done.bog || done.done); const steps = Object.keys(done).length; return { ...pl, sv, finished, steps }; };
+    const p1 = info(0), firstDone = p1 && p1.finished;
+    const plots = SLOTS.map((sl, i) => {
+      const f = info(i);
+      if (f) {
+        const started = !!f.sv;
+        return { x: sl.x, y: sl.y, built: true, empty: false, src: POND_SRC, name: f.id === 'p1' ? "Kiko's pond" : 'Pond ' + f.id.slice(1), status: f.finished ? '✓ All done' : started ? 'Keep building' : 'Start here', ring: f.finished ? '#6fbf5a' : '#f5b82e', glow: !started ? 'gmGlow 1.8s ease-out infinite' : 'none', badge: f.finished ? '✓' : '', badgeDisp: f.finished ? 'block' : 'none', go: () => this.open(f.id) };
+      }
+      return { x: sl.x, y: sl.y, built: false, empty: true, go: () => { if (!firstDone) { this.toastMsg("Finish Kiko's pond first. Then you can dig more!"); return; } this.setState({ pick: i }); } };
+    });
+    const has = (a, b) => gd.streams.some(([x, y]) => (x === a && y === b) || (x === b && y === a));
+    const links = NEAR.filter(([a, b]) => P[a] && P[b] && !has(a, b)).map(([a, b]) => ({ x: (SLOTS[a].x + SLOTS[b].x) / 2, y: (SLOTS[a].y + SLOTS[b].y) / 2, go: () => { this.save({ ...gd, streams: gd.streams.concat([[a, b]]) }); this.toastMsg('A stream! Water, frogs and bugs can travel between these ponds.'); } }));
+    const h = React.createElement;
+    const streamLayer = h('svg', { key: 'st', viewBox: '0 0 100 100', preserveAspectRatio: 'none', style: { position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 2, pointerEvents: 'none' } },
+      gd.streams.map(([a, b]) => { const A = SLOTS[a], B = SLOTS[b], mx = (A.x + B.x) / 2 + (B.y - A.y) * 0.18, my = (A.y + B.y) / 2 - (B.x - A.x) * 0.18, d = `M${A.x} ${A.y} Q${mx} ${my} ${B.x} ${B.y}`;
+        return h('g', { key: a + '-' + b }, h('path', { d, fill: 'none', stroke: '#4f93b3', strokeWidth: 22, strokeLinecap: 'round', vectorEffect: 'non-scaling-stroke', opacity: 0.85 }), h('path', { d, fill: 'none', stroke: '#bfe3ee', strokeWidth: 6, strokeLinecap: 'round', strokeDasharray: '12 28', vectorEffect: 'non-scaling-stroke', style: { animation: 'gmFlow 1.6s linear infinite' } })); }));
+    const nextId = 'p' + (Math.max(1, ...Object.values(P).map(x => +x.id.slice(1) || 1)) + 1);
+    const types = TYPES.map(t => ({ name: t.name, sub: t.sub, src: t.src || 'data:image/gif;base64,R0lGODlhAQABAAAAACw=', emo: t.emo || '', bd: t.ready ? '#ffd166' : '#e6dcc8', op: t.ready ? 1 : 0.6, soonDisp: t.ready ? 'none' : 'block',
+      go: () => { if (!t.ready) { this.toastMsg(t.name + ' is coming next!'); return; } const gd2 = { ...gd, plots: { ...P, [S.pick]: { id: nextId, type: t.id } } }; this.save(gd2); this.open(nextId); } }));
+    return {
+      plots, links, streamLayer, types,
+      subtitle: !firstDone ? "Finish Kiko's pond to dig more." : n < SLOTS.length ? 'Tap empty land to dig a new pond.' : 'Your garden is full of ponds!',
+      picking: S.pick !== null, closePick: () => this.setState({ pick: null }), stop: e => e.stopPropagation(),
+      toastX: ((S.toastPos || {}).x || window.innerWidth / 2) + 'px', toastY: ((S.toastPos || {}).y || 300) + 'px', hasToast: !!S.toast, toast: S.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

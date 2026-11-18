@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#cfe0b4}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+@keyframes pmPop{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}100%{transform:translate(-50%,-50%) scale(1);opacity:1}}
+@keyframes pmIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes pmNo{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+@keyframes pmWig{0%,100%{transform:rotate(0)}25%{transform:rotate(-6deg) scale(1.05)}75%{transform:rotate(6deg) scale(1.05)}}
+@keyframes pmGlow{0%{box-shadow:0 0 0 0 rgba(255,209,102,.9)}70%{box-shadow:0 0 0 18px rgba(255,209,102,0)}100%{box-shadow:0 0 0 0 rgba(255,209,102,0)}}
+@keyframes pmStar{0%{transform:scale(0) rotate(-90deg)}100%{transform:none}}
+</style>
+</helmet>
+<div style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body);color:#111111;background:linear-gradient(rgba(70,70,62,.3),rgba(70,70,62,.3)),url('assets/meadow.webp') center/cover no-repeat #cfe0b4;touch-action:none">
+  <div style="height:100%;box-sizing:border-box;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:clamp(10px,2vh,20px);padding:clamp(12px,2.6vh,28px) clamp(16px,3vw,44px)">
+    <div style="display:flex;align-items:center;gap:clamp(10px,2vw,24px)">
+      <a href="Ecosystem Builder.dc.html" style="display:inline-flex;align-items:center;min-height:56px;padding:0 24px;border-radius:999px;background:#fffaf1;border:3px solid #ecdcbc;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-heading);font-size:22px;color:#2b2416;text-decoration:none">← Pond</a>
+      <div style="display:{{ stepsDisp }};align-items:center;gap:8px">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3"><span style="display:flex;align-items:center;gap:8px;padding:8px 18px 8px 8px;border-radius:999px;background:{{ s.bg }};opacity:{{ s.op }}"><span style="display:grid;place-items:center;width:34px;height:34px;border-radius:999px;background:{{ s.dot }};color:#ffffff;font-weight:900;font-size:18px">{{ s.n }}</span><span style="font-family:var(--font-heading);font-size:clamp(22px,2.4vw,30px);color:#2b2416">{{ s.t }}</span></span></sc-for>
+      </div>
+      <button type="button" onClick="{{ hintGo }}" style="display:{{ hintBtnDisp }};margin-left:auto;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;background:rgba(255,250,241,.85);border:0;font-family:var(--font-body);font-weight:700;font-size:18px;color:#5d4a2c;cursor:pointer">Need a hint?</button>
+    </div>
+
+    <sc-if value="{{ isPlay }}" hint-placeholder-val="{{ true }}">
+      <div data-scene="1" onClick="{{ sceneTap }}" style="position:relative;min-height:0;justify-self:center;height:100%;width:min(100%,calc((100vh - 300px) * 1.6),1100px);display:flex;flex-direction:column;border-radius:32px;overflow:hidden;background:#eef3ea;border:5px solid {{ sceneBd }};box-shadow:0 8px 0 #e4d0a6;transition:border-color 300ms ease;animation:{{ sceneAnim }}">
+        <span style="flex:none;padding:clamp(10px,1.8vh,18px) clamp(18px,2.4vw,30px);background:#fffaf1;border-bottom:3px solid #ecdcbc;font-family:var(--font-heading);font-size:clamp(28px,3.4vw,48px);line-height:1.1;color:{{ problemC }};text-align:center">{{ problemTxt }}</span>
+        <span style="position:relative;flex:1 1 0;min-height:0;display:block"><span aria-hidden="true" style="position:absolute;inset:3%;background:url('{{ sceneSrc }}') center/contain no-repeat;filter:{{ sceneF }};transition:filter 1.4s ease"></span>
+        <sc-for list="{{ clues }}" as="c" hint-placeholder-count="0"><button type="button" onClick="{{ c.go }}" style="position:absolute;left:{{ c.l }};top:{{ c.t }};transform:translate(-50%,-50%);border:0;padding:0;background:none;cursor:pointer"><span style="display:{{ c.dotDisp }};place-items:center;width:clamp(60px,9vh,92px);aspect-ratio:1;border-radius:999px;background:rgba(255,209,102,.95);font-family:var(--font-heading);font-size:clamp(30px,4vh,44px);color:#4a2e0a;animation:pmGlow 1.6s ease-out infinite">?</span><span style="display:{{ c.lblDisp }};padding:10px 20px;border-radius:999px;background:#fffaf1;border:4px solid #c8372d;font-family:var(--font-heading);font-size:clamp(20px,2.4vw,30px);color:#8f1f17;white-space:nowrap;animation:pmIn .35s ease both">{{ c.lbl }}</span></button></sc-for>
+        <span aria-hidden="true" style="display:{{ overDisp }};position:absolute;left:50%;top:56%;width:38%;aspect-ratio:1;background:url('{{ overSrc }}') center/contain no-repeat;filter:drop-shadow(0 10px 12px rgba(0,0,0,.3)) {{ overF }};animation:pmPop .5s cubic-bezier(.3,1.6,.5,1) both;pointer-events:none"></span></span>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isFlip }}" hint-placeholder-val="{{ false }}">
+      <div style="min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:clamp(12px,2.4vw,28px)">
+        <sc-for list="{{ cards }}" as="c" hint-placeholder-count="6"><button type="button" onClick="{{ c.go }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:0;padding:10px;border-radius:28px;background:{{ c.bg }};border:5px solid {{ c.bd }};box-shadow:0 6px 0 #e4d0a6;cursor:pointer;font:inherit"><span aria-hidden="true" style="display:{{ c.backDisp }};font-family:var(--font-heading);font-size:clamp(48px,7vw,96px);color:#ffffff">?</span><span aria-hidden="true" style="flex:1 1 0;min-height:0;width:100%;display:{{ c.imgDisp }};background:url('{{ c.src }}') center/contain no-repeat"></span><span style="display:{{ c.txtDisp }};font-family:var(--font-heading);font-size:clamp(20px,2.4vw,32px);line-height:1.1;text-align:center">{{ c.t }}</span></button></sc-for>
+      </div>
+    </sc-if>
+
+    <div style="display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1.6vh,16px)">
+      <span style="max-width:100%;box-sizing:border-box;padding:12px 30px;border-radius:999px;background:#fffaf1;box-shadow:0 5px 0 #e4d0a6;font-family:var(--font-body);font-weight:800;font-size:clamp(24px,2.8vw,40px);line-height:1.15;color:#111111;text-align:center;text-wrap:balance">{{ ask }}</span>
+      <div style="display:{{ optsDisp }};width:100%;max-width:1100px;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,28px)">
+        <sc-for list="{{ opts }}" as="o" hint-placeholder-count="3"><button type="button" onPointerDown="{{ o.down }}" onClick="{{ o.go }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;height:clamp(130px,24vh,230px);padding:10px 12px;border-radius:28px;background:#ffffff;border:5px solid {{ o.bd }};box-shadow:0 6px 0 #e4d0a6;opacity:{{ o.op }};cursor:pointer;font:inherit;touch-action:none;user-select:none;animation:{{ o.anim }}"><span aria-hidden="true" style="display:{{ o.imgDisp }};flex:1 1 0;min-height:0;width:100%;background:url('{{ o.src }}') center/contain no-repeat;filter:{{ o.f }};pointer-events:none"></span><span style="font-family:var(--font-heading);font-size:clamp(20px,2.3vw,32px);line-height:1.1;color:#111111;text-align:center;text-wrap:balance;pointer-events:none">{{ o.t }}</span></button></sc-for>
+      </div>
+      <button type="button" onClick="{{ nextGo }}" style="display:{{ nextDisp }};align-items:center;gap:12px;min-height:clamp(60px,10vh,88px);padding:0 44px;border-radius:999px;background:#fffaf1;border:3px solid #ffd166;box-shadow:0 6px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(26px,3vw,38px);color:#2b2416;cursor:pointer;animation:pmGlow 1.6s ease-out infinite">{{ nextTxt }} →</button>
+    </div>
+  </div>
+  <sc-if value="{{ dragging }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="position:fixed;left:{{ dragX }}px;top:{{ dragY }}px;width:clamp(110px,14vw,170px);aspect-ratio:1;transform:translate(-50%,-50%) rotate(-6deg);background:url('{{ dragSrc }}') center/contain no-repeat;filter:drop-shadow(0 12px 14px rgba(40,30,10,.35));pointer-events:none;z-index:60"></span></sc-if>
+  <sc-if value="{{ hasMsg }}" hint-placeholder-val="{{ false }}"><div role="status" style="position:fixed;left:50%;top:clamp(80px,14vh,140px);transform:translateX(-50%);z-index:40;max-width:min(760px,calc(100vw - 32px));box-sizing:border-box;padding:16px 30px;border-radius:32px;background:#fffaf1;border:5px solid {{ msgBd }};box-shadow:0 6px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(24px,2.8vw,38px);line-height:1.2;color:#111111;text-align:center;animation:pmIn .3s ease both">{{ msg }}</div></sc-if>
+  <sc-if value="{{ hasWin }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(70,70,62,.4)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:clamp(10px,2vh,20px);padding:clamp(22px,4vh,40px) clamp(30px,5vw,64px);border-radius:44px;background:#ffd166;box-shadow:0 8px 0 #e3a92e">
+        <span style="font-family:var(--font-heading);font-size:clamp(44px,6vw,84px);line-height:1;color:#4a2e0a">{{ winTitle }}</span>
+        <span style="display:flex;gap:12px"><sc-for list="{{ stars }}" as="st" hint-placeholder-count="3"><span style="font-size:clamp(44px,6vw,80px);line-height:1;color:{{ st.c }};animation:pmStar .5s cubic-bezier(.3,1.6,.5,1) {{ st.d }} both">★</span></sc-for></span>
+        <button type="button" onClick="{{ roundGo }}" style="min-height:clamp(64px,10vh,92px);padding:0 48px;border-radius:999px;background:#fffaf1;border:0;box-shadow:0 6px 0 #e4d0a6;font-family:var(--font-heading);font-size:clamp(26px,3vw,38px);color:#2b2416;cursor:pointer">{{ roundTxt }} →</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const B2 = 'uploads/05_IMAGES/Batch_02_Individual_PNGs/', KOI = 'uploads/05_IMAGES/Batch_01_Individual_PNGs/watercolor_kohaku_koi_fish.webp', BL = 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
+const STINK = 'saturate(.5) sepia(.9) hue-rotate(35deg) brightness(.7)', MUD = 'sepia(1) brightness(.6) contrast(.85)', GREY = 'grayscale(.8)';
+// key: [fix name, fix pic, problem, problem pic, problem filter, clues, cause opts [[text, pic, filter]], right idx, because]
+const P = {
+  pump: ['Pump', 'uploads/08_submersible_pump.webp', 'Still, stinky water', 'assets/underwater_bg.webp', STINK, ['No ripples', 'Stink lines'], [['The water is not moving', 'assets/underwater_bg.webp', STINK], ['The water is too cold', 'assets/birch_winter.webp'], ['Too many plants', 'assets/uw_plants.webp']], 0, 'Still water gets no fresh air, so it gets stinky.'],
+  solids: ['Poop filter', 'assets/part_filter_box.webp', 'Poop everywhere', 'assets/pellets_pile.webp', 'sepia(.6) brightness(.7)', ['Brown bits', 'Murky water'], [['Old poop is rotting', 'assets/pellets_pile.webp', 'sepia(.6) brightness(.7)'], ['The sun is too bright', 'assets/garden_sunset.webp'], ['Too many rocks', 'assets/rocks.webp']], 0, 'Old poop rots and makes the water dirty.'],
+  air: ['Bubbler', 'uploads/954303aa-6218-4fdf-8a37-67df88f90d20-3b8001cc.webp', "Fish can't breathe", KOI, GREY, ['Gasping at the top', 'No bubbles'], [['Too much sun', 'assets/garden_sunset.webp'], ['Not enough air in the water', 'assets/n_bubbles.webp'], ['Too many snails', 'assets/n_snail.webp']], 1, 'Fish breathe air mixed in the water. It is called oxygen.'],
+  liner: ['Liner', 'assets/liner.webp', 'Water soaks away', 'assets/hole_empty.webp', 'none', ['Water line dropping', 'Wet dirt'], [['The dirt soaks it up', 'assets/hole_empty.webp'], ['The fish drink it all', KOI], ['The plants eat it', 'assets/uw_plants.webp']], 0, 'Dirt soaks up water like a sponge.'],
+  rocks: ['Edge rocks', 'assets/rocks.webp', 'The liner slips in', 'assets/hole_liner.webp', 'none', ['Edge sliding in', 'Nothing on top'], [['Nothing holds the edges down', 'assets/hole_liner.webp'], ['The water is too warm', 'assets/garden_sunset.webp'], ['The fish pull it', KOI]], 0, 'With nothing heavy on the edges, the liner slides in.'],
+  bio: ['Helper filter', 'assets/part_bio_box.webp', 'Yucky invisible stuff', 'uploads/ammonia_blob.webp', 'none', ['Fish look sick', 'Smelly water'], [['Helpers have no home', 'uploads/bacteria_rocks.webp', GREY], ['Too much water', 'assets/drops.webp'], ['The sun is too bright', 'assets/garden_sunset.webp']], 0, 'Tiny helpers eat the yucky stuff, but they need a bumpy home.'],
+  lily: ['Water lily', 'assets/lily2.webp', 'Too hot and sunny', 'assets/garden_sunset.webp', 'saturate(1.3)', ['Hot sun', 'No shade'], [['There is no shade', 'assets/garden_sunset.webp'], ['Too many fish', KOI], ['The water is too deep', 'assets/hole_empty.webp']], 0, 'With no shade, the sun makes the water hot.'],
+  coontail: ['Coontail', 'assets/uw_plants.webp', 'Not enough air', KOI, GREY, ['No plants', 'Fish at the top'], [['No plants are making air', 'assets/uw_plants.webp', GREY], ['The water is too clean', 'assets/drops.webp'], ['Too many rocks', 'assets/rocks.webp']], 0, 'Underwater plants use sunshine to make air.'],
+  eelgrass: ['Tape grass', 'assets/n_eelgrass.webp', 'Baby fish need to hide', 'uploads/02_small_orange_white_koi.webp', 'none', ['Out in the open', 'Nowhere to hide'], [['There is nowhere to hide', 'uploads/02_small_orange_white_koi.webp'], ['The water is too cold', 'assets/birch_winter.webp'], ['Too much food', 'assets/pellets_pile.webp']], 0, 'Baby fish need plants to hide from big animals.'],
+  snail: ['Pond snail', 'assets/n_snail.webp', 'Green slime', 'uploads/clump_moss.webp', 'none', ['Green slime', 'Slimy rocks'], [['Algae is growing', 'uploads/clump_moss.webp'], ['The water is too cold', 'assets/birch_winter.webp'], ['Too many rocks', 'assets/rocks.webp']], 0, 'The green slime is algae. It grows with sun and fish poop.'],
+  daphnia: ['Water flea', B2 + 'watercolor_daphnia_with_embryos.webp', 'Green, cloudy water', 'uploads/bacteria_helper-60b8a16f.webp', 'none', ['Green water', 'Cannot see the bottom'], [['Tiny algae are floating', 'uploads/bacteria_helper-60b8a16f.webp'], ['Too many rocks', 'assets/rocks.webp'], ['Too much shade', 'assets/oak.webp']], 0, 'Tiny floating algae make the water green and cloudy.'],
+  clam: ['Fingernail clam', B2 + 'watercolor_fingernail_clam_on_pebbles.webp', 'Dirty water', 'assets/underwater_bg.webp', MUD, ['Cloudy water', 'Floating bits'], [['Little bits of dirt float around', 'assets/underwater_bg.webp', MUD], ['The water is too cold', 'assets/birch_winter.webp'], ['Too many plants', 'assets/uw_plants.webp']], 0, 'Tiny bits of dirt float in the water.'],
+  minnow: ['Minnow', B2 + 'watercolor_fathead_minnow_illustration.webp', 'Mosquito babies', 'assets/underwater_bg.webp', 'saturate(.7)', ['Wiggly bugs', 'Still water'], [['Mosquitoes lay eggs in still water', 'assets/hole_empty.webp'], ['The plants make them', 'assets/uw_plants.webp'], ['They fall from the trees', 'assets/oak.webp']], 0, 'Mosquitoes lay eggs in still water.'],
+  bacteria: ['Tiny helpers', 'uploads/bacteria_helper.webp', 'Yucky ammonia', 'uploads/ammonia_blob.webp', 'none', ['Fish look sick', 'Smelly water'], [['Fish pee and poop', KOI], ['Rain', 'assets/drops.webp'], ['Flowers', 'assets/lily2.webp']], 0, 'Fish pee and poop make ammonia.'],
+  copepod: ['Copepod', B2 + 'watercolor_cyclops_copepod_illustration.webp', 'Old food bits', 'assets/pellets_pile.webp', 'none', ['Food on the bottom', 'Food floating'], [['Leftover food is rotting', 'assets/pellets_pile.webp'], ['The fish are too big', KOI], ['The water is too cold', 'assets/birch_winter.webp']], 0, 'Leftover food sinks and rots.']
+};
+const ROUNDS = [['pump', 'solids', 'air'], ['liner', 'rocks', 'bio'], ['lily', 'coontail', 'eelgrass'], ['snail', 'daphnia', 'clam'], ['minnow', 'bacteria', 'copepod']];
+const CPOS = [['30%', '42%'], ['68%', '66%']];
+const mix = (a, s) => a.map((x, i) => [x, Math.abs(Math.sin((i + 1) * (s + 5) * 12.9898) * 43758.5) % 1]).sort((p, q) => p[1] - q[1]).map(p => p[0]);
+class Component extends DCLogic {
+  state = { r: 0, i: 0, step: 'look', found: [], bad: null, tried: null, fixed: false, miss: 0, wig: null, msg: '', msgOk: true, drag: null, flip: [], foundF: [], won: false };
+  componentWillUnmount() { clearTimeout(this.mt); clearTimeout(this.tt); clearTimeout(this.ft); }
+  say(m, ok, ms) { clearTimeout(this.mt); this.setState({ msg: m, msgOk: ok }); this.mt = setTimeout(() => this.setState({ msg: '' }), ms || 2600); }
+  cur() { const o = mix(ROUNDS[this.state.r] || [], this.state.r); return o[this.state.i]; }
+  tryFix(k) {
+    const S = this.state, c = this.cur(); if (S.step !== 'fix' || S.fixed) return;
+    if (k === c) { this.setState({ fixed: true, tried: null, wig: null }); this.say('Yes! The ' + P[k][0].toLowerCase() + ' fixes it!', true); return; }
+    this.setState({ tried: k, miss: S.miss + 1 }); this.say('Hmm, the ' + P[k][0].toLowerCase() + ' did not fix it. Still ' + P[c][2].toLowerCase() + '!', false, 3000);
+    clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ tried: null }), 2400);
+  }
+  down(k, e) {
+    if (this.state.step !== 'fix' || this.state.fixed) return; e.preventDefault(); const sx = e.clientX, sy = e.clientY; let moved = false;
+    const mv = ev => { if (!moved && Math.hypot(ev.clientX - sx, ev.clientY - sy) > 8) moved = true; if (moved) this.setState({ drag: { k, x: ev.clientX, y: ev.clientY } }); };
+    const up = ev => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); this.setState({ drag: null }); if (!moved) return; const el = document.elementFromPoint(ev.clientX, ev.clientY); if (el && el.closest && el.closest('[data-scene]')) this.tryFix(k); };
+    window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up); this._moved = () => moved;
+  }
+  next() { const S = this.state, last = S.i >= 2; if (last) this.setState({ won: true }); else this.setState({ i: S.i + 1, step: 'look', found: [], fixed: false, tried: null, bad: null, wig: null, msg: '' }); }
+  renderVals() {
+    const S = this.state, isFlip = S.r >= ROUNDS.length, k = isFlip ? null : this.cur(), p = k ? P[k] : null;
+    const stepIdx = { look: 0, why: 1, fix: 2 }[S.step];
+    const flipKeys = ['pump', 'snail', 'lily'], cards = isFlip ? mix(flipKeys.flatMap(x => [{ k: x, kind: 'p' }, { k: x, kind: 't' }]), 3) : [];
+    const flipWin = isFlip && flipKeys.every(x => S.foundF.indexOf(x) > -1);
+    let ask = '', opts = [], optsDisp = 'none';
+    if (p && S.step === 'look') ask = 'Look closely! Tap what looks wrong. (' + S.found.length + ' of 2)';
+    if (p && S.step === 'why') { ask = 'What could be causing this?'; optsDisp = 'grid'; opts = p[6].map(([t, src, f], j) => ({ t, src: src || BL, f: f || 'none', imgDisp: src ? 'block' : 'none', bd: S.bad === j ? '#c8372d' : '#ecdcbc', op: 1, anim: S.bad === j ? 'pmNo .4s ease' : S.wig === 'w' + j ? 'pmWig .8s ease 2' : 'none', down: () => {}, go: () => { if (j === p[7]) { this.setState({ step: 'fix', bad: null, wig: null }); this.say('Yes! ' + p[8], true, 3600); } else { this.setState({ bad: j, miss: S.miss + 1 }); this.say('Not that one. Look at the clues again!', false); } } })); }
+    if (p && S.step === 'fix') { ask = S.fixed ? 'You fixed it!' : 'Which one fixes it? Drag it onto the picture.'; optsDisp = S.fixed ? 'none' : 'grid'; opts = mix(ROUNDS[S.r], S.r + 9).map(x => ({ t: P[x][0], src: P[x][1], f: 'none', imgDisp: 'block', bd: S.tried === x ? '#c8372d' : '#ecdcbc', op: S.drag && S.drag.k === x ? 0.4 : 1, anim: S.wig === 'f' + x ? 'pmWig .8s ease 2' : 'none', down: e => this.down(x, e), go: () => { if (this._moved && this._moved()) return; this.tryFix(x); } })); }
+    if (isFlip) ask = flipWin ? 'You found them all!' : 'Bonus! Flip two cards. Find a fix and its problem.';
+    const nStars = Math.max(1, 3 - S.miss), lastRound = isFlip;
+    return {
+      isPlay: !isFlip, isFlip, stepsDisp: isFlip ? 'none' : 'flex', hintBtnDisp: isFlip || S.fixed || S.step === 'look' ? 'none' : 'inline-flex',
+      steps: ['Look', 'Why?', 'Fix it!'].map((t, j) => ({ n: j < stepIdx || (j === 2 && S.fixed) ? '✓' : String(j + 1), t, bg: j === stepIdx ? '#fffaf1' : 'rgba(255,250,241,.6)', dot: j < stepIdx || (j === 2 && S.fixed) ? '#8fb36a' : j === stepIdx ? '#2f5f58' : '#b9ad96', op: j <= stepIdx ? 1 : 0.85 })),
+      problemTxt: p ? (S.fixed ? 'Fixed! No more ' + p[2].toLowerCase() + '!' : 'Uh oh! ' + p[2] + '!') : '', problemC: S.fixed ? '#2f5a10' : '#c8372d',
+      sceneSrc: p ? p[3] : BL, sceneF: p ? (S.fixed ? 'none' : p[4]) : 'none', sceneBd: S.fixed ? '#8fb36a' : S.tried ? '#c8372d' : S.drag ? '#ffd166' : '#ecdcbc', sceneAnim: S.tried ? 'pmNo .4s ease' : 'none', sceneTap: () => {},
+      clues: p && S.step === 'look' ? p[5].map((lbl, j) => { const f = S.found.indexOf(j) > -1; return { l: CPOS[j][0], t: CPOS[j][1], lbl, dotDisp: f ? 'none' : 'grid', lblDisp: f ? 'block' : 'none', go: e => { e.stopPropagation(); if (f) return; const nf = S.found.concat([j]); this.setState({ found: nf }); if (nf.length >= 2) { clearTimeout(this.ft); this.ft = setTimeout(() => this.setState({ step: 'why' }), 1200); } } }; }) : [],
+      overDisp: p && (S.fixed || S.tried) ? 'block' : 'none', overSrc: p ? (S.fixed ? p[1] : S.tried ? P[S.tried][1] : BL) : BL, overF: S.tried ? 'grayscale(.3)' : '',
+      ask, opts, optsDisp,
+      nextDisp: p && S.fixed ? 'inline-flex' : 'none', nextTxt: S.i >= 2 ? 'Finish round' : 'Next problem', nextGo: () => this.next(),
+      hintGo: () => { if (!p) return; clearTimeout(this.tt); this.setState({ wig: S.step === 'why' ? 'w' + p[7] : 'f' + k }); this.tt = setTimeout(() => this.setState({ wig: null }), 1700); },
+      cards: cards.map((c, j) => { const up = S.flip.indexOf(j) > -1 || S.foundF.indexOf(c.k) > -1, f = S.foundF.indexOf(c.k) > -1; return { bg: up ? '#ffffff' : '#2f5f58', bd: f ? '#8fb36a' : up ? '#ffd166' : '#1f423d', backDisp: up ? 'none' : 'block', imgDisp: up ? 'block' : 'none', txtDisp: up ? 'block' : 'none', src: c.kind === 'p' ? P[c.k][1] : P[c.k][3], t: c.kind === 'p' ? P[c.k][0] : P[c.k][2], go: () => { if (S.flip.length >= 2 || up) return; const fl = S.flip.concat([j]); this.setState({ flip: fl }); if (fl.length === 2) { const [a, b] = fl.map(x => cards[x]); clearTimeout(this.ft); if (a.k === b.k) this.ft = setTimeout(() => this.setState(st => ({ foundF: st.foundF.concat([a.k]), flip: [] })), 500); else this.ft = setTimeout(() => this.setState({ flip: [] }), 1200); } } }; }),
+      dragging: !!S.drag, dragX: S.drag ? S.drag.x : 0, dragY: S.drag ? S.drag.y : 0, dragSrc: S.drag ? P[S.drag.k][1] : BL,
+      hasMsg: !!S.msg, msg: S.msg, msgBd: S.msgOk ? '#8fb36a' : '#e07a2e',
+      hasWin: S.won || flipWin, winTitle: lastRound ? 'You did it all!' : 'Great job!', stars: [0, 1, 2].map(j => ({ c: j < nStars ? '#ffffff' : 'rgba(255,255,255,.35)', d: (0.2 + j * 0.25) + 's' })),
+      roundTxt: lastRound ? 'Play again' : S.r === ROUNDS.length - 1 ? 'Bonus round' : 'Next round',
+      roundGo: () => this.setState({ r: lastRound ? 0 : S.r + 1, i: 0, step: 'look', found: [], fixed: false, tried: null, bad: null, miss: 0, won: false, flip: [], foundF: [], msg: '' })
+    };
+  }
+}
+</script>
+</body>
+</html>

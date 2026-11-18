@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+<meta name="ext-resource-dependency" content="assets/part_motor.webp">
+<meta name="ext-resource-dependency" content="assets/part_impeller.webp">
+<meta name="ext-resource-dependency" content="assets/part_cage.webp">
+<meta name="ext-resource-dependency" content="assets/part_outlet.webp">
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#1f7a78"/><text x="50" y="62" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="34" fill="#fffaf0">KP</text></svg></template>
+<style>
+html,body{margin:0;min-height:100%;background:#7f9656}
+a{color:#1f7a78}a:hover{color:#145856}
+@keyframes psIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes psPulse{0%{box-shadow:0 0 0 0 rgba(255,214,64,.9)}100%{box-shadow:0 0 0 6cqw rgba(255,214,64,0)}}
+@keyframes psSwim{0%{transform:translateX(0) scaleX(1)}45%{transform:translateX(-30cqw) scaleX(1)}50%{transform:translateX(-30cqw) scaleX(-1)}95%{transform:translateX(0) scaleX(-1)}100%{transform:translateX(0) scaleX(1)}}
+@keyframes psBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes psBub{from{transform:translateY(0);opacity:.9}to{transform:translateY(-40cqw);opacity:0}}
+@keyframes psGlow{0%,100%{box-shadow:0 5px 0 #c9a93a,0 0 0 0 rgba(255,214,64,0)}50%{box-shadow:0 5px 0 #c9a93a,0 0 0 1.4cqw rgba(255,214,64,.55)}}
+@keyframes psFill{from{width:0}to{width:100%}}
+@keyframes psDrift{0%,100%{transform:translateX(0) scaleX(-1)}50%{transform:translateX(-4vw) scaleX(-1)}}
+</style>
+</helmet>
+<div style="position:relative;height:100vh;box-sizing:border-box;padding:clamp(16px,3vw,48px);display:flex;align-items:center;font-family:var(--font-body);color:#1d1b18;background:url(assets/garden_done.webp) center/cover no-repeat #7f9656;overflow:hidden">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,50,40,.25),rgba(20,50,40,.45));pointer-events:none"></div>
+  <img src="uploads/05_IMAGES/Batch_01_Individual_PNGs/watercolor_kohaku_koi_fish.webp" alt="" aria-hidden="true" style="position:absolute;right:3vw;top:2vh;width:clamp(110px,13vw,220px);opacity:.95;animation:psDrift 9s ease-in-out infinite;pointer-events:none">
+  <div style="position:relative;width:100%;height:100%;max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;align-content:center;justify-content:center;gap:clamp(14px,2.4vw,36px)">
+
+    <div style="flex:1 1 300px;max-width:440px;box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(12px,1.8vw,22px);padding:clamp(20px,2.6vw,40px);border-radius:32px;background:#fffaf0;box-shadow:0 10px 0 rgba(0,0,0,.14);min-width:0">
+      <span style="font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#1f7a78">Selected project</span>
+      <h1 style="margin:0;font-family:Fredoka,sans-serif;font-weight:700;font-size:clamp(40px,5vw,72px);line-height:1;color:#1d1b18">Kiko's Pond</h1>
+      <p style="margin:0;font-size:clamp(15px,1.3vw,20px);line-height:1.5;max-width:42ch;text-wrap:pretty;color:#3a352e">A pond-building science game for kids who are just learning to read. Players dig, filter, plant and care for a koi ecosystem, and learn why each part keeps the water alive.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="Ecosystem Builder.dc.html" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:#1f7a78;color:#fff;font-weight:700;font-size:18px;text-decoration:none;box-shadow:0 5px 0 #145856" style-hover="background:#196a68;color:#fff" style-active="transform:translateY(3px);box-shadow:0 2px 0 #145856">Try it ↗</a>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="5">
+          <button type="button" onClick="{{ t.go }}" style="position:relative;min-height:40px;padding:0 16px;border:0;border-radius:999px;background:{{ t.bg }};color:{{ t.ink }};font-family:var(--font-body);font-weight:700;font-size:15px;cursor:pointer;overflow:hidden" style-hover="background:{{ t.hov }}">{{ t.name }}<span style="position:absolute;left:0;bottom:0;height:3px;background:#ffd640;display:{{ t.barDisp }};animation:psFill {{ dur }}ms linear"></span></button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="position:relative;flex:1 1 480px;min-width:0;max-width:calc((100vh - 2 * clamp(16px,3vw,48px)) * 4 / 3);aspect-ratio:4/3;container-type:inline-size;border-radius:32px;overflow:hidden;background:#9fc98a;border:6px solid #fffaf0;box-shadow:0 10px 0 rgba(0,0,0,.14)">
+      <sc-if value="{{ is0 }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;background:url(assets/garden_dug.webp) center/cover"></div>
+        <div style="position:absolute;left:5cqw;right:5cqw;top:5cqw;display:flex;flex-direction:column;gap:3.4cqw;padding:5cqw;border-radius:4cqw;background:#fffaf0;box-shadow:0 1.2cqw 0 rgba(0,0,0,.12);animation:psIn .5s ease both">
+          <span style="font-family:Fredoka,sans-serif;font-weight:700;font-size:4.8cqw;color:#1f7a78">Clean water!</span>
+          <div style="display:flex;flex-wrap:wrap;gap:.6cqw .4cqw;font-family:Fredoka,sans-serif;font-weight:600;font-size:7cqw;line-height:1.2;color:#1d1b18">
+            <sc-for list="{{ words }}" as="w" hint-placeholder-count="7"><span style="padding:0 1.2cqw;border-radius:1.6cqw;background:{{ w.bg }};transition:background 200ms">{{ w.t }}</span></sc-for>
+          </div>
+          <div style="display:flex">
+            <span style="display:inline-flex;align-items:center;min-height:9cqw;padding:0 5cqw;border-radius:999px;background:#fff6dc;border:.5cqw solid {{ nextBd }};font-family:Fredoka,sans-serif;font-weight:700;font-size:4cqw;color:#1d1b18;animation:{{ nextAnim }}">Next →</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is1 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;background:url(assets/garden_dug.webp) center/cover"></div>
+        <div style="position:absolute;left:5cqw;top:4.5cqw;padding:2.4cqw 4cqw;border-radius:3cqw;background:rgba(18,70,70,.86);animation:psIn .5s ease both">
+          <span style="font-family:Fredoka,sans-serif;font-weight:700;font-size:5.4cqw;color:#fff">Tap to add the pump</span>
+        </div>
+        <div style="position:absolute;left:52%;top:58%;width:18cqw;height:18cqw;border-radius:999px;transform:translate(-50%,-50%);background:rgba(255,236,150,.35);border:.8cqw solid #ffd640;animation:psPulse 1.4s ease-out infinite"></div>
+        <img src="assets/part_motor.webp" alt="" style="position:absolute;left:52%;top:58%;width:13cqw;margin:-6.5cqw 0 0 -6.5cqw;animation:psBob 2s ease-in-out infinite">
+      </sc-if>
+
+      <sc-if value="{{ is2 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;background:url(assets/garden_done.webp) center/cover;filter:grayscale(.6) brightness(.8)"></div>
+        <div style="position:absolute;left:8cqw;right:8cqw;top:50%;transform:translateY(-40%);display:flex;flex-direction:column;gap:2.6cqw;padding:5cqw;border-radius:4cqw;background:#fff4ef;border:.8cqw solid #c8372d;box-shadow:0 1.6cqw 0 rgba(120,20,10,.3);animation:psIn .5s ease both">
+          <span style="align-self:flex-start;padding:1cqw 2.8cqw;border-radius:999px;background:#c8372d;color:#fff;font-family:Fredoka,sans-serif;font-weight:700;font-size:3.6cqw">! Slime alert!</span>
+          <span style="font-family:Fredoka,sans-serif;font-weight:700;font-size:7.4cqw;line-height:1.05;color:#1d1b18">Uh oh! Green slime is growing!</span>
+        </div>
+        <div style="position:absolute;right:3cqw;top:2cqw;display:flex;flex-direction:column;align-items:flex-end">
+          <span style="padding:.8cqw 2.4cqw;border-radius:3cqw;background:#fff;font-family:Caveat,cursive;font-size:4.6cqw;color:#1d1b18;box-shadow:0 .5cqw 0 rgba(0,0,0,.15)">Save me!</span>
+          <img src="uploads/05_IMAGES/Batch_01_Individual_PNGs/watercolor_kohaku_koi_fish.webp" alt="Kiko the koi" style="width:24cqw;transform:scaleX(-1);animation:psBob 2.4s ease-in-out infinite">
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is3 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;background:#f3e6cc"></div>
+        <div style="position:absolute;left:5cqw;top:4.5cqw;font-family:Fredoka,sans-serif;font-weight:700;font-size:5.4cqw;color:#1f7a78">Build a pump</div>
+        <div style="position:absolute;left:5cqw;right:5cqw;top:15cqw;bottom:5cqw;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:3cqw">
+          <sc-for list="{{ parts }}" as="p" hint-placeholder-count="4">
+            <div style="display:flex;align-items:center;gap:2.6cqw;padding:2.6cqw;border-radius:3cqw;background:{{ p.bg }};opacity:{{ p.op }};transition:all 400ms ease;min-width:0">
+              <img src="{{ p.src }}" alt="" style="width:15cqw;height:15cqw;flex:none;object-fit:contain;filter:{{ p.filter }};transition:filter 400ms">
+              <div style="display:flex;flex-direction:column;gap:.6cqw;min-width:0">
+                <span style="font-family:Fredoka,sans-serif;font-weight:700;font-size:3.8cqw;color:#1d1b18">{{ p.name }}</span>
+                <span style="font-family:Fredoka,sans-serif;font-weight:700;font-size:2.8cqw;color:#2f7d4a;display:{{ p.okDisp }}">✓ Added</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ is4 }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;inset:0;background:url(assets/underwater_bg.webp) center/cover"></div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:url(assets/uw_plants.webp) bottom/contain repeat-x"></div>
+        <img src="uploads/05_IMAGES/Batch_01_Individual_PNGs/watercolor_kohaku_koi_fish.webp" alt="Kiko the koi" style="position:absolute;right:8cqw;top:34%;width:32cqw;animation:psSwim 14s ease-in-out infinite">
+        <sc-for list="{{ bubs }}" as="b" hint-placeholder-count="8"><span style="position:absolute;left:{{ b.l }};bottom:4cqw;width:{{ b.s }};height:{{ b.s }};border-radius:999px;border:2px solid rgba(255,255,255,.85);animation:psBub {{ b.d }} linear {{ b.dl }} infinite"></span></sc-for>
+        <div style="position:absolute;left:5cqw;top:4.5cqw;padding:2cqw 3.4cqw;border-radius:3cqw;background:rgba(255,250,240,.94);font-family:Fredoka,sans-serif;font-weight:700;font-size:4.8cqw;color:#1f7a78;animation:psIn .5s ease both">Bubbles mix in fresh air</div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { step: 0, tick: 0 };
+  componentDidMount() {
+    this.iv = setInterval(() => this.setState(s => {
+      const t = s.tick + 1;
+      return t * 100 >= this.dur(s.step) ? { step: (s.step + 1) % 5, tick: 0 } : { tick: t };
+    }), 100);
+  }
+  componentWillUnmount() { clearInterval(this.iv); }
+  dur(i) { return [7000, 5000, 5500, 6000, 6000][i]; }
+  renderVals() {
+    const { step, tick } = this.state, ms = tick * 100;
+    const T = ['Read along', 'Reading vs. doing', 'Warnings', 'Building', 'Underwater'];
+    const tabs = T.map((name, i) => ({ name, barDisp: i === step ? 'block' : 'none', bg: i === step ? '#1f7a78' : '#efe5cf', ink: i === step ? '#fff' : '#3a352e', hov: i === step ? '#196a68' : '#e6d9bd', go: () => this.setState({ step: i, tick: 0 }) }));
+    const W = ['Kiko', 'needs', 'clean', 'water', 'to', 'swim', 'in.'];
+    const wi = Math.floor((ms - 600) / 620);
+    const words = W.map((t, i) => ({ t, bg: i === wi ? '#ffd640' : 'transparent' }));
+    const done = wi >= W.length;
+    const P = [['Motor', 'assets/part_motor.webp'], ['Spinner', 'assets/part_impeller.webp'], ['Cage', 'assets/part_cage.webp'], ['Outlet', 'assets/part_outlet.webp']];
+    const pk = Math.floor((ms - 500) / 1200);
+    const parts = P.map(([name, src], i) => ({ name, src, okDisp: i <= pk ? 'block' : 'none', bg: i <= pk ? '#fffaf0' : 'rgba(255,255,255,.35)', op: i <= pk ? 1 : .8, filter: i <= pk ? 'none' : 'grayscale(1) brightness(1.6) opacity(.45)' }));
+    const bubs = Array.from({ length: 8 }, (_, i) => ({ l: (8 + i * 11) + '%', s: (1.2 + (i % 3) * 0.7) + 'cqw', d: (4 + (i % 4)) + 's', dl: (-i * 0.7) + 's' }));
+    return {
+      tabs, words, parts, bubs, dur: this.dur(step),
+      is0: step === 0, is1: step === 1, is2: step === 2, is3: step === 3, is4: step === 4,
+      nextBd: done ? '#ffd640' : '#ecdcbc', nextAnim: done ? 'psGlow 1.2s ease-in-out infinite' : 'none'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:#cfe0b4}a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}
+@keyframes p4Drop{0%{transform:translateY(-640%)}70%{transform:translateY(6%)}85%{transform:translateY(-4%)}100%{transform:none}}
+@keyframes p4Bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes p4Glow{0%,100%{box-shadow:0 0 0 0 rgba(255,209,102,.9)}50%{box-shadow:0 0 0 10px rgba(255,209,102,0)}}
+@keyframes p4Shim{from{transform:translate(-4%,-3%)}to{transform:translate(4%,3%)}}
+@keyframes p4Pop{0%{transform:scale(.4);opacity:0}100%{transform:none;opacity:1}}</style>
+</helmet>
+<div style="position:fixed;inset:0;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:clamp(10px,2vh,20px) clamp(12px,2vw,28px);padding:clamp(14px,3vh,28px) clamp(14px,2.4vw,36px);box-sizing:border-box;font-family:var(--font-body);background:linear-gradient(rgba(40,70,60,.28),rgba(40,70,60,.28)),url('assets/meadow.webp') center/cover no-repeat">
+  <div style="grid-column:1 / -1;display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+    <a href="Ecosystem Builder.dc.html" aria-label="Back to pond" style="display:grid;place-items:center;width:48px;height:48px;border-radius:999px;background:rgba(255,250,241,.75);font-size:24px;color:#2b2416;text-decoration:none">←</a>
+    <span style="font-family:var(--font-heading);font-size:clamp(34px,4vw,56px);line-height:1;color:#ffffff;text-shadow:0 3px 0 rgba(20,50,40,.5)">Pond Four</span>
+    <div style="display:{{ lvlDisp }};margin-left:auto;gap:6px;padding:6px;border-radius:999px;background:rgba(255,250,241,.9)"><sc-for list="{{ levels }}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{ m.go }}" style="min-height:52px;padding:0 20px;border-radius:999px;border:0;background:{{ m.bg }};font-family:var(--font-heading);font-size:clamp(18px,1.9vw,24px);color:#2b2416;cursor:pointer">{{ m.t }}</button></sc-for></div>
+    <div style="margin-left:{{ modeML }};display:flex;gap:6px;padding:6px;border-radius:999px;background:rgba(255,250,241,.9)">
+      <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2"><button type="button" onClick="{{ m.go }}" style="min-height:52px;padding:0 22px;border-radius:999px;border:0;background:{{ m.bg }};font-family:var(--font-heading);font-size:clamp(18px,1.9vw,24px);color:#2b2416;cursor:pointer">{{ m.t }}</button></sc-for>
+    </div>
+  </div>
+
+  <sc-for list="{{ players }}" as="p" hint-placeholder-count="1">
+    <div style="grid-row:2;grid-column:{{ p.col }};align-self:center;justify-self:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding:clamp(14px,2.4vh,24px) clamp(14px,2vw,26px);border-radius:36px;background:rgba(255,250,241,.94);border:5px solid {{ p.bd }};box-shadow:0 6px 0 #e4d0a6,0 16px 30px rgba(20,40,30,.22);opacity:{{ p.op }};transition:opacity 300ms ease,border-color 300ms ease;min-width:clamp(120px,14vw,200px)">
+      <span aria-hidden="true" style="width:clamp(80px,12vh,130px);aspect-ratio:1;border-radius:999px;background:{{ p.chip }};box-shadow:inset 0 -6px 0 rgba(0,0,0,.12);animation:{{ p.anim }}"></span>
+      <span style="font-family:var(--font-heading);font-size:clamp(24px,2.6vw,36px);line-height:1;color:#111111">{{ p.name }}</span>
+      <span style="padding:4px 14px;border-radius:999px;background:{{ p.tagBg }};font-weight:800;font-size:clamp(16px,1.6vw,20px);color:{{ p.tagC }}">{{ p.tag }}</span>
+      <span style="display:flex;gap:6px"><sc-for list="{{ p.wins }}" as="w" hint-placeholder-count="0"><span style="font-size:26px;line-height:1;color:#e3a92e">★</span></sc-for></span>
+    </div>
+  </sc-for>
+
+  <div style="grid-row:2;grid-column:2;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+    <div style="height:100%;max-height:calc((100vw - 460px) * 6.6 / 7);aspect-ratio:7/6.6;max-width:100%;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:auto 1fr;column-gap:clamp(5px,.8vw,10px)">
+      <sc-for list="{{ cols }}" as="c" hint-placeholder-count="7">
+        <span aria-hidden="true" style="grid-row:1;display:block;aspect-ratio:1;margin:0 8% 6px;border-radius:999px;background:{{ c.ghost }};opacity:{{ c.ghostOp }};transition:opacity 150ms ease;animation:p4Bob 1.4s ease-in-out infinite"></span>
+      </sc-for>
+      <div style="grid-row:2;grid-column:1 / -1;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:clamp(5px,.8vw,10px);padding:clamp(8px,1.2vw,16px);border-radius:32px;position:relative;overflow:hidden;background:linear-gradient(rgba(40,110,120,.35),rgba(20,70,80,.55)),url('assets/underwater_bg.webp') center/cover;border:6px solid #8a6a43;box-shadow:0 10px 0 #5e4528,0 22px 40px rgba(20,40,30,.35),inset 0 0 40px rgba(0,30,40,.35)">
+        <span aria-hidden="true" style="position:absolute;inset:-20%;background:radial-gradient(ellipse at 30% 20%,rgba(255,255,255,.18),transparent 40%),radial-gradient(ellipse at 70% 70%,rgba(255,255,255,.12),transparent 40%);animation:p4Shim 9s ease-in-out infinite alternate;pointer-events:none"></span>
+        <sc-for list="{{ cols }}" as="c" hint-placeholder-count="7">
+          <button type="button" onClick="{{ c.go }}" onMouseEnter="{{ c.hover }}" onMouseLeave="{{ c.leave }}" aria-label="Drop in this column" style="position:relative;display:grid;grid-template-rows:repeat(6,minmax(0,1fr));gap:clamp(5px,.8vw,10px);padding:3px;min-width:0;border:0;border-radius:999px;background:{{ c.bg }};cursor:{{ c.cur }};transition:background 150ms ease">
+            <sc-for list="{{ c.cells }}" as="x" hint-placeholder-count="6"><span key="{{ x.k }}" style="display:block;width:100%;height:100%;min-height:0;border-radius:999px;background:{{ x.bg }};box-shadow:{{ x.sh }};animation:{{ x.anim }}"></span></sc-for>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <sc-if value="{{ hasEnd }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:50;display:grid;place-items:center;background:rgba(40,60,50,.4)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:clamp(12px,2.4vh,22px);padding:clamp(24px,4vh,44px) clamp(30px,5vw,64px);border-radius:44px;background:#fffaf1;box-shadow:0 8px 0 #e4d0a6,0 20px 40px rgba(0,0,0,.25);animation:p4Pop .45s cubic-bezier(.3,1.5,.5,1) both">
+        <span aria-hidden="true" style="width:clamp(110px,18vh,170px);aspect-ratio:1;border-radius:999px;background:{{ endChip }}"></span>
+        <span style="font-family:var(--font-heading);font-size:clamp(40px,5.4vw,76px);line-height:1;color:#2f5a10;text-align:center">{{ endTitle }}</span>
+        <span style="font-weight:700;font-size:clamp(22px,2.4vw,30px);color:#2b2416">{{ endSub }}</span>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+          <button type="button" onClick="{{ again }}" style="min-height:80px;padding:0 44px;border-radius:999px;background:#ffd166;border:0;box-shadow:0 6px 0 #e3a92e;font-family:var(--font-heading);font-size:clamp(26px,3vw,36px);color:#4a2e0a;cursor:pointer">Play again →</button>
+          <button type="button" onClick="{{ peek }}" style="min-height:80px;padding:0 32px;border-radius:999px;background:transparent;border:3px solid #ecdcbc;font-family:var(--font-heading);font-size:clamp(22px,2.4vw,28px);color:#5d4a2c;cursor:pointer">See the board</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ peeking }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ again }}" style="position:fixed;left:50%;bottom:clamp(14px,3vh,28px);transform:translateX(-50%);z-index:40;min-height:72px;padding:0 44px;border-radius:999px;background:#ffd166;border:0;box-shadow:0 6px 0 #e3a92e;font-family:var(--font-heading);font-size:30px;color:#4a2e0a;cursor:pointer">Play again →</button>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const KOI = "radial-gradient(circle at 32% 26%,rgba(255,255,255,.7),rgba(255,255,255,0) 30%),url('uploads/05_IMAGES/Batch_01_Individual_PNGs/watercolor_kohaku_koi_fish.webp') center/82% no-repeat,radial-gradient(circle at 50% 45%,#fff6ef,#f6c9ad)", PAD = "radial-gradient(circle at 32% 26%,rgba(255,255,255,.6),rgba(255,255,255,0) 30%),url('assets/lily2.webp') center/100% no-repeat,radial-gradient(circle at 50% 45%,#f1f8e4,#b9d993)", HOLE = 'radial-gradient(circle at 35% 30%,rgba(255,255,255,.55),rgba(255,255,255,0) 38%),radial-gradient(circle at 50% 60%,rgba(214,240,238,.55),rgba(150,205,205,.35))';
+const empty = () => Array.from({ length: 6 }, () => Array(7).fill(0));
+const lineAt = (b, r, c, p) => { for (const [dr, dc] of [[0, 1], [1, 0], [1, 1], [1, -1]]) { const w = [[r, c]]; for (const s of [1, -1]) { let rr = r + dr * s, cc = c + dc * s; while (b[rr] && b[rr][cc] === p) { w.push([rr, cc]); rr += dr * s; cc += dc * s; } } if (w.length >= 4) return w; } return null; };
+const rowFor = (b, c) => { let r = 5; while (r >= 0 && b[r][c]) r--; return r; };
+class Component extends DCLogic {
+  state = { b: empty(), turn: 2, win: null, last: null, hov: null, vsKiko: true, lvl: 1, score: [0, 0], peek: false, think: false };
+  componentWillUnmount() { clearTimeout(this.ai); clearTimeout(this.et); }
+  place(c) {
+    const S = this.state; if (S.win) return; const r = rowFor(S.b, c); if (r < 0) return;
+    const b = S.b.map(x => x.slice()); b[r][c] = S.turn; const w = lineAt(b, r, c, S.turn), full = b[0].every(x => x);
+    const win = w ? { p: S.turn, cells: w } : full ? { p: 0, cells: [] } : null, score = S.score.slice(); if (w) score[S.turn - 1]++;
+    this.setState({ b, last: r + ',' + c, win: null, turn: win ? S.turn : 3 - S.turn, score, think: false });
+    if (win) { clearTimeout(this.et); this.setState({ win: { ...win, show: false } }); this.et = setTimeout(() => this.setState(s => ({ win: s.win && { ...s.win, show: true } })), 1100); }
+    else if (S.vsKiko && S.turn === 2) { clearTimeout(this.ai); this.setState({ think: true }); this.ai = setTimeout(() => this.kiko(), 900); }
+  }
+  kiko() {
+    const b = this.state.b, open = [0, 1, 2, 3, 4, 5, 6].filter(c => rowFor(b, c) >= 0);
+    const test = (c, p) => { const r = rowFor(b, c), t = b.map(x => x.slice()); t[r][c] = p; return !!lineAt(t, r, c, p); };
+    const L = this.state.lvl, rnd = () => open[Math.floor(Math.random() * open.length)];
+    let pick = null;
+    if (L >= 0 && Math.random() < [0.5, 1, 1][L]) pick = open.find(c => test(c, 1));
+    if (pick == null && L >= 1 && Math.random() < [0, 0.75, 1][L]) pick = open.find(c => test(c, 2));
+    if (pick == null && L === 2) { const safe = open.filter(c => { const r = rowFor(b, c); if (r <= 0) return true; const t2 = b.map(x => x.slice()); t2[r][c] = 1; const r2 = r - 1; t2[r2][c] = 2; return !lineAt(t2, r2, c, 2); }); const pref = [3, 2, 4, 1, 5, 0, 6].filter(c => safe.indexOf(c) > -1); pick = pref[0]; }
+    if (pick == null) { const pref = [3, 2, 4, 1, 5, 0, 6].filter(c => open.indexOf(c) > -1); pick = L === 0 ? rnd() : Math.random() < 0.6 ? pref[0] : rnd(); }
+    this.place(pick);
+  }
+  drop(c) { const S = this.state; if (S.think || S.win || (S.vsKiko && S.turn === 1)) return; this.place(c); }
+  reset(extra) { clearTimeout(this.ai); clearTimeout(this.et); this.setState({ b: empty(), turn: 2, win: null, last: null, peek: false, think: false, ...(extra || {}) }); }
+  renderVals() {
+    const S = this.state, inLine = (r, c) => S.win && S.win.cells.some(([a, b]) => a === r && b === c), yourTurn = !S.win && !S.think && !(S.vsKiko && S.turn === 1);
+    const names = S.vsKiko ? ['Kiko', 'You'] : ['Koi', 'Lily pad'];
+    return {
+      levels: [['Easy', 0], ['Medium', 1], ['Hard', 2]].map(([t, v]) => ({ t, bg: S.lvl === v ? '#8fb36a' : 'transparent', go: () => this.reset({ lvl: v, score: [0, 0] }) })), lvlDisp: S.vsKiko ? 'flex' : 'none', modeML: S.vsKiko ? '0' : 'auto',
+      modes: [['Play Kiko', true], ['2 players', false]].map(([t, v]) => ({ t, bg: S.vsKiko === v ? '#ffd166' : 'transparent', go: () => this.reset({ vsKiko: v, score: [0, 0] }) })),
+      players: [2, 1].map((p, i) => { const on = !S.win && S.turn === p; return { col: i === 0 ? 1 : 3, chip: p === 1 ? KOI : PAD, name: names[p - 1], bd: on ? '#ffd166' : '#ecdcbc', op: on || S.win ? 1 : 0.6, anim: on ? 'p4Bob 1.2s ease-in-out infinite' : 'none', tag: S.win ? (S.win.p === p ? 'Winner!' : S.win.p === 0 ? 'Tie' : '\u00a0') : on ? (S.think && p === 1 ? 'Thinking…' : 'Your turn!') : 'Waiting', tagBg: on ? '#2f5f58' : '#efe6d2', tagC: on ? '#ffffff' : '#5d4a2c', wins: Array.from({ length: S.score[p - 1] }, (_, k) => ({ k })) }; }),
+      cols: Array.from({ length: 7 }, (_, c) => { const open = rowFor(S.b, c) >= 0, can = yourTurn && open; return { ghost: S.turn === 1 ? KOI : PAD, ghostOp: can && S.hov === c ? 1 : 0, bg: can && S.hov === c ? 'rgba(255,255,255,.22)' : 'transparent', cur: can ? 'pointer' : 'default', hover: () => this.setState({ hov: c }), leave: () => this.setState({ hov: null }), go: () => this.drop(c), cells: Array.from({ length: 6 }, (_, r) => { const v = S.b[r][c]; return { k: r + '-' + c + '-' + v, bg: v === 1 ? KOI : v === 2 ? PAD : HOLE, sh: inLine(r, c) ? '0 0 0 5px #ffd166,0 0 22px 8px rgba(255,209,102,.85)' : v ? '0 5px 0 rgba(0,20,30,.25),0 0 0 3px rgba(255,255,255,.7)' : 'inset 0 4px 8px rgba(0,30,40,.25),0 0 0 2px rgba(255,255,255,.35)', anim: S.last === r + ',' + c ? 'p4Drop .5s cubic-bezier(.45,0,.6,1) both' : inLine(r, c) ? 'p4Glow 1s ease-in-out infinite' : 'none' }; }) }; }),
+      hasEnd: !!(S.win && S.win.show) && !S.peek, peeking: S.peek,
+      endChip: S.win && S.win.p === 1 ? KOI : S.win && S.win.p === 2 ? PAD : HOLE,
+      endTitle: !S.win ? '' : S.win.p === 0 ? 'A tie!' : S.vsKiko ? (S.win.p === 2 ? 'You won!' : 'Kiko won!') : names[S.win.p - 1] + ' wins!',
+      endSub: !S.win ? '' : S.win.p === 0 ? 'The board is full.' : S.vsKiko && S.win.p === 1 ? 'Kiko got 4 in a row. Try again!' : '4 in a row!',
+      again: () => this.reset(), peek: () => this.setState({ peek: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/styles.css">
+<script src="_ds/organic-3bf144cd-0f77-4d21-b523-8671b888de01/_ds_bundle.js"></script>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#cfd6a6}
+a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-600)}
+@keyframes enBeacon{0%{box-shadow:0 0 0 0 rgba(245,184,46,.85),0 6px 0 #e4d0a6}100%{box-shadow:0 0 0 22px rgba(245,184,46,0),0 6px 0 #e4d0a6}}
+</style>
+</helmet>
+<main style="position:fixed;inset:0;overflow:hidden;font-family:var(--font-body);color:#2f281b;background:#cfd6a6">
+
+  <div aria-hidden="true" style="position:absolute;inset:0;transform:{{ sceneTransform }};transform-origin:50% 62%;transition:transform 1600ms cubic-bezier(.45,0,.2,1)">
+    <div style="position:absolute;inset:0;background:url('assets/meadow.webp') center 58%/cover no-repeat"></div>
+
+    <span style="position:absolute;left:30vw;bottom:41vh;height:24vh;aspect-ratio:3/4;background:url('assets/birch_spring.webp') center bottom/contain no-repeat;opacity:.95"></span>
+    <span style="position:absolute;right:31vw;bottom:42vh;height:20vh;aspect-ratio:3/4;background:url('assets/birch_autumn.webp') center bottom/contain no-repeat;opacity:.9"></span>
+
+    <span style="position:absolute;left:-7vw;bottom:-3vh;height:min(96vh,78vw);aspect-ratio:3/4;background:url('assets/oak.webp') center bottom/contain no-repeat;filter:drop-shadow(0 18px 18px rgba(70,60,20,.18))"></span>
+    <span style="position:absolute;right:-6vw;bottom:-2vh;height:min(92vh,74vw);aspect-ratio:3/4;background:url('assets/birch_summer.webp') center bottom/contain no-repeat;filter:drop-shadow(0 18px 18px rgba(70,60,20,.18))"></span>
+
+    <sc-for list="{{ stones }}" as="st" hint-placeholder-count="9">
+      <span style="position:absolute;left:{{ st.x }}vw;bottom:{{ st.y }}vh;width:{{ st.w }}vw;aspect-ratio:8/5;transform:translateX(-50%);background:url('{{ st.src }}') center/contain no-repeat;filter:drop-shadow(0 6px 6px rgba(60,50,20,.2))"></span>
+    </sc-for>
+
+    <sc-for list="{{ shrooms }}" as="m" hint-placeholder-count="6">
+      <span style="position:absolute;left:{{ m.x }}vw;bottom:{{ m.y }}vh;width:{{ m.w }}vw;aspect-ratio:3/2;background:url('{{ m.src }}') center bottom/contain no-repeat"></span>
+    </sc-for>
+
+    <div style="position:absolute;inset:0;background:radial-gradient(90% 70% at 18% 6%,rgba(255,240,200,.35),transparent 55%),radial-gradient(130% 100% at 50% 60%,transparent 60%,rgba(70,55,20,.25) 100%)"></div>
+  </div>
+
+  <sc-if value="{{ isTitle }}" hint-placeholder-val="{{ true }}">
+    <section style="position:absolute;left:0;right:0;top:7vh;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding:0 var(--space-6);opacity:{{ titleOp }};transition:opacity 600ms ease">
+      <img src="assets/wildkind_logo.webp" alt="Wildkind" style="display:block;width:min(640px,78vw);height:auto;filter:drop-shadow(0 3px 0 rgba(251,243,226,.85)) drop-shadow(0 8px 18px rgba(40,50,20,.25))">
+      <span style="display:block;font-family:var(--font-heading);font-size:clamp(24px,3.2vw,40px);line-height:1;color:#2f281b;padding:10px 26px;border-radius:999px;background:#fffaf1;box-shadow:0 5px 0 #e4d0a6">Ecosystem Builder</span>
+      <span style="font-size:clamp(24px,2.6vw,34px);font-weight:700;color:#111111;padding:10px 26px;border-radius:999px;background:rgba(255,250,241,.95)">Build a home where nature can thrive.</span>
+    </section>
+    <div style="position:absolute;left:50%;bottom:6vh;transform:translateX(-50%);opacity:{{ titleOp }};transition:opacity 500ms ease">
+      <button type="button" onClick="{{ start }}" style="font-size:clamp(28px,3vw,40px);min-height:92px;padding:0 60px;border-radius:999px;cursor:pointer;white-space:nowrap;background:#ffd166;color:#4a2e0a;border:0;box-shadow:0 6px 0 #e3a92e,0 12px 22px rgba(214,150,40,.28);font-family:var(--font-heading);font-weight:400;animation:enBeacon 1.8s ease-out infinite" style-hover="background:#f8c64e" style-active="transform:translateY(3px)">Start the adventure</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isMap }}" hint-placeholder-val="{{ false }}">
+    <section aria-live="polite" style="position:absolute;left:50%;bottom:3vh;transform:translateX(-50%);width:min(1200px,calc(100vw - 32px));display:flex;flex-direction:column;align-items:center;opacity:{{ mapOp }};transition:opacity 600ms ease 200ms">
+      <div aria-label="Kiko the koi" style="width:clamp(220px,min(34vw,30vh),420px);aspect-ratio:1.6;background:url('uploads/05_IMAGES/Batch_01_Individual_PNGs/watercolor_kohaku_koi_fish.webp') center/contain no-repeat;filter:drop-shadow(0 12px 14px rgba(40,60,60,.3))"></div>
+      <div style="position:relative;width:100%;box-sizing:border-box;display:flex;flex-direction:column;gap:clamp(8px,1.6vh,18px);margin-top:clamp(10px,2vh,22px);padding:clamp(24px,4vh,44px) clamp(28px,4vw,56px);border-radius:40px;background:#fffaf1;border:4px solid #ecdcbc;box-shadow:0 8px 0 #e4d0a6,0 18px 36px rgba(80,55,20,.22)">
+        <span aria-hidden="true" style="position:absolute;left:50%;top:-20px;width:36px;height:36px;transform:translateX(-50%) rotate(45deg);background:#fffaf1;border-left:4px solid #ecdcbc;border-top:4px solid #ecdcbc;border-radius:6px 0 0 0"></span>
+        <sc-for list="{{ helpLines }}" as="l" hint-placeholder-count="2"><span style="display:block;font-family:{{ l.ff }};font-size:{{ l.sz }};line-height:1.25;letter-spacing:.02em;font-weight:{{ l.fw }};color:{{ l.fg }};text-wrap:balance"><sc-for list="{{ l.words }}" as="w" hint-placeholder-count="4"><span onClick="{{ w.go }}" style="display:inline;padding:0 .1em;border-radius:8px;cursor:pointer;background:{{ w.bg }};box-shadow:{{ w.sh }};transition:background 150ms ease,box-shadow 150ms ease">{{ w.t }}</span> </sc-for></span></sc-for>
+      </div>
+      <a href="Ecosystem Builder.dc.html?realm=koi&amp;intro=done" style="margin-top:clamp(16px,3vh,32px);display:inline-flex;align-items:center;font-size:clamp(26px,min(3vw,5vh),38px);min-height:clamp(72px,12vh,92px);padding:0 48px;border-radius:999px;white-space:nowrap;text-decoration:none;background:#ffd166;color:#4a2e0a;border:0;box-shadow:0 6px 0 #e3a92e,0 12px 22px rgba(214,150,40,.28);font-family:var(--font-heading);font-weight:400;animation:enBeacon 1.8s ease-out infinite">Build Kiko a home!</a>
+    </section>
+
+    <button type="button" onClick="{{ restart }}" style="position:absolute;left:var(--space-4);bottom:var(--space-4);min-height:44px;padding:0 18px;border-radius:999px;border:0;background:rgba(251,243,226,.9);color:#4a3f2c;font:inherit;font-size:18px;font-weight:700;cursor:pointer;white-space:nowrap;opacity:{{ mapOp }}">Start over</button>
+  </sc-if>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;followAlong&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Reading&quot;},&quot;readPace&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:750,&quot;min&quot;:400,&quot;max&quot;:1500,&quot;step&quot;:50,&quot;unit&quot;:&quot;ms/word&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Reading&quot;}}">
+const U = 'uploads/';
+const STONES = [
+  [50, 1, 30, 9], [41, 10, 21, 7], [54, 17, 16, 4], [45, 23.5, 12, 5], [53, 28.5, 9, 2], [47.5, 32.5, 7, 6], [52, 35.5, 5.5, 3], [49, 38, 4.2, 1], [51, 40, 3.2, 8]
+].map(([x, y, w, n]) => ({ x, y, w, src: U + 'bridge_pebble_0' + n + '.webp' }));
+const SHROOMS = [
+  [12, 1, 15, '01_red_amanita_mushrooms'], [24, 3, 10, '07_morel_mushrooms'],
+  [80, 2, 14, '02_golden_chanterelles_on_log'], [68, 5, 9, '08_white_puffball_mushrooms'],
+  [33, 34, 5, '09_purple_woodland_mushrooms'], [64, 33, 5, '03_pink_translucent_mushrooms']
+].map(([x, y, w, f]) => ({ x, y, w, src: U + f + '.webp' }));
+const B1 = U + '05_IMAGES/Batch_01_Individual_PNGs/', B2 = U + '05_IMAGES/Batch_02_Individual_PNGs/';
+const PLACES = [
+  { name: 'Garden & Soil', x: 20, y: 14, src: U + '02_golden_chanterelles_on_log.webp', href: 'Ecosystem Builder.dc.html?realm=garden', open: false, bg1: '#f3e6c8', bg2: '#d9c79c', delay: 500 },
+  { name: 'Koi Pond', x: 50, y: 9, src: B1 + 'watercolor_kohaku_koi_fish.webp', href: 'Garden Map.dc.html', open: true, bg1: '#e6f2ef', bg2: '#9cc5bf', delay: 300 },
+  { name: 'Wildlife Pond', x: 80, y: 14, src: B2 + 'watercolor_dragonfly_nymph_isolated.webp', href: 'Ecosystem Builder.dc.html?realm=wildlife', open: false, bg1: '#e9efd9', bg2: '#b6c79a', delay: 700 }
+];
+
+class Component extends DCLogic {
+  rwW(key, text, on) { const W = this.state.rw || {}, words = String(text).split(' '); if (on === false) return words.map(w => ({ t: w, bg: 'transparent', sh: 'none' })); this._rwQ = { k: key, words, pace: +(this.props.readPace ?? 750) }; if (!this._rwOn) { this._rwOn = 1; this._rwT = setTimeout(() => this._rwKick(), 500); } return words.map((w, i) => { const cur = this.props.followAlong !== false && W.k === key && W.i === i; return { t: w, bg: cur ? '#ffd400' : 'transparent', sh: cur ? '0 0 0 5px #ffd400' : 'none', go: () => { this.setState({ rw: { k: key, i } }); clearTimeout(this._rwT); this._rwT = setTimeout(() => this._rwKick(), this._rwDur(this._rwQ, i)); } }; }); }
+  _rwDur(q, i) { const w = (q && q.words[i]) || ''; return q.pace * (0.75 + Math.min(w.length, 10) * 0.05) + (/[.!?,:]$/.test(w) ? q.pace * 0.6 : 0); }
+  _rwKick() { clearTimeout(this._rwT); const q = this._rwQ, W = this.state.rw || {}; if (!q) { this._rwT = setTimeout(() => this._rwKick(), 300); return; }
+    if (W.k !== q.k) { this.setState({ rw: { k: q.k, i: 0 } }); this._rwT = setTimeout(() => this._rwKick(), this._rwDur(q, 0) + 300); return; }
+    if (W.i < q.words.length - 1) { const i = W.i + 1; this.setState({ rw: { k: q.k, i } }); this._rwT = setTimeout(() => this._rwKick(), this._rwDur(q, i)); return; }
+    if (W.i === q.words.length - 1) this.setState({ rw: { k: q.k, i: q.words.length } });
+    this._rwT = setTimeout(() => this._rwKick(), 300); }
+  constructor(p) {
+    super(p);
+    const direct = (location.hash || '') === '#realms';
+    this.state = { phase: direct ? 'map' : 'title', shown: direct, hl: 1 };
+  }
+  componentDidMount() {
+    if (this.state.shown) return;
+    this.onKey = e => { if (this.state.phase === 'title' && (e.key === 'Enter' || e.key === ' ')) this.start(); };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { clearTimeout(this._rwT); window.removeEventListener('keydown', this.onKey); clearTimeout(this.t); }
+  start = () => {
+    if (this.state.phase !== 'title') return;
+    const reduce = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.setState({ phase: 'walking' });
+    this.t = setTimeout(() => {
+      this.setState({ phase: 'map' });
+      setTimeout(() => this.setState({ shown: true }), 30);
+      try { history.replaceState(null, '', '#realms'); } catch (e) {}
+    }, reduce ? 50 : 1500);
+  };
+  renderVals() {
+    const ph = this.state.phase;
+    const inMap = ph !== 'title';
+    return {
+      stones: STONES, shrooms: SHROOMS,
+      sceneTransform: inMap ? 'scale(1.14) translateY(4vh)' : 'none',
+      isTitle: ph !== 'map', isMap: ph === 'map',
+      titleOp: ph === 'title' ? 1 : 0,
+      mapOp: this.state.shown ? 1 : 0,
+      start: this.start,
+      ...(() => { const on = ph === 'map', HL = [['Hey friend!', 'var(--font-heading)', 400, '#4a5a35', 'clamp(48px,min(7vw,10vh),104px)'], ['Can you build me a home?', 'var(--font-body)', 700, '#111111', 'clamp(44px,min(6.4vw,9vh),96px)']], txt = HL.map(x => x[0]).join(' '), all = this.rwW('help', txt, on); let p = 0;
+        return { helpLines: HL.map(([s, ff, fw, fg, sz]) => { const n = s.split(' ').length, words = all.slice(p, p + n); p += n; return { words, ff, fw, fg, sz }; }) }; })(),
+      places: PLACES.map(p => ({ ...p, size: p.open ? 'min(26vmin,240px)' : 'min(20vmin,190px)', ring: p.open ? '#f5b82e' : '#fbf3e2', filter: p.open ? 'none' : 'grayscale(.85) opacity(.75)', pe: p.open ? 'auto' : 'none', locked: !p.open })),
+      restart: () => {
+        try { localStorage.setItem('ecosystemBuilder.koiPond.v3', '{}'); } catch (e) {}
+        try { history.replaceState(null, '', location.pathname); } catch (e) {}
+        this.setState({ phase: 'title', shown: false, hl: 1 });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
